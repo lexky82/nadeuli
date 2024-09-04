@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import normalize from "styled-normalize";
 
 export const GlobalStyles = createGlobalStyle`
+  ${normalize}
+
   body {
    font-family: "Noto Sans KR", sans-serif;
    margin : 0;
