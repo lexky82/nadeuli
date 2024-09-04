@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import RectIcon from "./RectIcon";
+import Logo from "./Logo";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -14,16 +15,11 @@ const routes = [
 
 const NavContainer = styled.nav`
   display: flex;
+  position: fixed;
+  background-color: white;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
   padding: 8px 40px;
   align-items: center;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  margin-right: 65px;
 `;
 
 const RoutesWrapper = styled.div`
@@ -47,13 +43,6 @@ const SearchText = styled.input`
   border: none;
 `;
 
-const Logo = styled.span`
-  font-weight: bold;
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.primary};
-  margin-left: 8px;
-`;
-
 const SearchWrapper = styled.div`
   position: relative;
   margin-right: 480px;
@@ -67,16 +56,7 @@ const IconWrapper = styled.div`
 export default function Navbar() {
   return (
     <NavContainer>
-      <LogoWrapper>
-        <Image
-          src="/logo.svg" // public 디렉토리 내의 파일은 '/' 경로로 시작합니다.
-          alt="Logo"
-          width={24} // 로고의 가로 크기
-          height={24} // 로고의 세로 크기
-        />
-
-        <Logo>나들이</Logo>
-      </LogoWrapper>
+      <Logo />
 
       <RoutesWrapper>
         {routes.map((route, key) => {
