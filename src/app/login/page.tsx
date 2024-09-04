@@ -1,7 +1,12 @@
-import { useState } from "react";
+import LoginForm from "./LoginForm";
+import { LoginContainer } from "./style";
 
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <LoginContainer>
+      <LoginForm />
+    </LoginContainer>
+  );
 };
 
 export default LoginPage;
