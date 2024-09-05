@@ -5,6 +5,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import RectIcon from "./RectIcon";
 import Logo from "./Logo";
+import { usePathname } from "next/navigation";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -28,8 +29,7 @@ const RoutesWrapper = styled.div`
 `;
 
 const Route = styled.span<{ primary?: boolean }>`
-  color: ${(props) =>
-    props.primary ? props.theme.colors.primary : props.theme.colors.gray};
+  color: ${(props) => (props.primary ? props.theme.colors.primary : props.theme.colors.gray)};
   margin-right: 18px;
   font-size: 20px;
 `;
@@ -53,38 +53,44 @@ const IconWrapper = styled.div`
   align-items: center;
 `;
 
+const noRenderPath = ["/login", "/signup", "/findid", "/findpw"];
+
 export default function Navbar() {
-  return (
-    <NavContainer>
-      <Logo />
+  const currentPath = usePathname();
 
-      <RoutesWrapper>
-        {routes.map((route, key) => {
-          return (
-            <Link key={key} href={route.path}>
-              <Route>{route.title}</Route>
-            </Link>
-          );
-        })}
-      </RoutesWrapper>
+  if (!noRenderPath.includes(currentPath)) {
+    return (
+      <NavContainer>
+        <Logo />
 
-      <SearchWrapper>
-        <SearchText type="text" placeholder="지역이나 유적지를 검색해보세요!" />
-        <Image
-          src="/Search.svg"
-          alt="searchbutton"
-          width={24}
-          height={24}
-          style={{ position: "absolute", right: 25, top: 8, marginLeft: 25 }}
-        />
-      </SearchWrapper>
+        <RoutesWrapper>
+          {routes.map((route, key) => {
+            return (
+              <Link key={key} href={route.path}>
+                <Route>{route.title}</Route>
+              </Link>
+            );
+          })}
+        </RoutesWrapper>
 
-      <IconWrapper>
-        <RectIcon src="/Ink_pen.svg" width={48} height={48} alt="write" />
-        <span style={{ marginRight: 8, marginLeft: 8 }}>|</span>
-        <RectIcon src="/Notifications.svg" width={40} height={40} alt="write" />
-        <RectIcon src="/Person.svg" width={40} height={40} alt="write" />
-      </IconWrapper>
-    </NavContainer>
-  );
+        <SearchWrapper>
+          <SearchText type="text" placeholder="지역이나 유적지를 검색해보세요!" />
+          <Image
+            src="/Search.svg"
+            alt="searchbutton"
+            width={24}
+            height={24}
+            style={{ position: "absolute", right: 25, top: 8, marginLeft: 25 }}
+          />
+        </SearchWrapper>
+
+        <IconWrapper>
+          <RectIcon src="/Ink_pen.svg" width={48} height={48} alt="write" />
+          <span style={{ marginRight: 8, marginLeft: 8 }}>|</span>
+          <RectIcon src="/Notifications.svg" width={40} height={40} alt="write" />
+          <RectIcon src="/Person.svg" width={40} height={40} alt="write" />
+        </IconWrapper>
+      </NavContainer>
+    );
+  }
 }
