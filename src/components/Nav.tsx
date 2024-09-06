@@ -17,35 +17,36 @@ const routes = [
 const NavContainer = styled.nav`
   display: flex;
   position: fixed;
+  max-height: 3rem;
   background-color: white;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
-  padding: 8px 40px;
+  box-shadow: 0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 2.5rem;
   align-items: center;
 `;
 
 const RoutesWrapper = styled.div`
   display: flex;
-  margin-right: 280px;
+  margin-right: 17.5rem;
 `;
 
 const Route = styled.span<{ primary?: boolean }>`
   color: ${(props) => (props.primary ? props.theme.colors.primary : props.theme.colors.gray)};
-  margin-right: 18px;
-  font-size: 20px;
+  margin-right: 1.125rem;
+  font-size: 1.25rem;
 `;
 
 const SearchText = styled.input`
-  width: 325px;
-  font-size: 16px;
-  padding: 8px 12px;
-  padding-right: 55px;
+  width: 20.3rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  padding-right: 3.438rem;
   background-color: white;
   border: none;
 `;
 
 const SearchWrapper = styled.div`
   position: relative;
-  margin-right: 480px;
+  margin-right: 30rem;
 `;
 
 const IconWrapper = styled.div`
@@ -92,5 +93,7 @@ export default function Navbar() {
         </IconWrapper>
       </NavContainer>
     );
+  } else {
+    return <div></div>;
   }
 }
