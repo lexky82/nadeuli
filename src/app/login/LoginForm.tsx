@@ -12,6 +12,7 @@ import {
   OrSeparator,
   SocialLogin,
   GoogleLoginBox,
+  AutoLoginCheckbox,
 } from "./style";
 
 const LoginForm = () => {
@@ -33,10 +34,10 @@ const LoginForm = () => {
       </FormFieldWrapper>
 
       <LoginOptionsWrapper>
-        <div>
+        <AutoLoginCheckbox>
           <input type="checkbox" name="autoLogin" id="autoLogin" />
           <span>자동 로그인</span>
-        </div>
+        </AutoLoginCheckbox>
 
         <FindLinkBox>
           <Link href="/findid">이메일 찾기</Link>

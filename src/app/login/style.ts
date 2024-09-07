@@ -14,7 +14,6 @@ export const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-image: url("/login_background_image.jpg");
-  filter: brightness(0.7);
 `;
 
 export const LoginHeading = styled(Heading)`
@@ -39,7 +38,6 @@ export const LoginFormWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  backdrop-filter: none;
 `;
 
 export const FormFieldWrapper = styled.label`
@@ -98,4 +96,10 @@ export const GoogleLoginBox = styled.div`
   background-color: #d9d9d9;
   width: 412px;
   gap: 106px;
+`;
+
+export const AutoLoginCheckbox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
 `;
