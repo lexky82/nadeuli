@@ -8,7 +8,6 @@ const Input = styled.input<{ width?: number }>`
   padding: 10px 15px;
   background-color: #d9d9d9;
   border-radius: 15px;
-  filter: brightness(1);
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.gray};
 
