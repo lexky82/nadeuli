@@ -11,6 +11,7 @@ const Button = styled.button`
   font-size: 12px;
   font-weight: 300;
   transition: background-color 0.15s ease;
+  width: 100%;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.secondary};
