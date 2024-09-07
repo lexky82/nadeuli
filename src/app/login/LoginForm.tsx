@@ -2,35 +2,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  LoginFormWrapper,
   FormFieldWrapper,
   FormInput,
-  LoginOptionsWrapper,
-  FindLinkBox,
   Submit,
   RecomendSignup,
   OrSeparator,
   SocialLogin,
   GoogleLoginBox,
-  AutoLoginCheckbox,
-} from "./style";
+} from "@/components/form";
+import { LoginFormWrapper, LoginOptionsWrapper, AutoLoginCheckbox, FindLinkBox } from "./style";
 
 const LoginForm = () => {
   return (
     <LoginFormWrapper>
       <FormFieldWrapper>
         <label>이메일</label>
-        <FormInput id="email" type="text" width={380} placeholder="이메일을 입력해주세요." />
+        <FormInput id="email" type="text" placeholder="이메일을 입력해주세요." />
       </FormFieldWrapper>
 
       <FormFieldWrapper>
         <label>패스워드</label>
-        <FormInput
-          id="password"
-          type="password"
-          width={380}
-          placeholder="패스워드를 입력해주세요."
-        />
+        <FormInput id="password" type="password" placeholder="패스워드를 입력해주세요." />
       </FormFieldWrapper>
 
       <LoginOptionsWrapper>
