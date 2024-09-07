@@ -2,17 +2,17 @@
 
 import Logo from "@/components/Logo";
 import LoginForm from "./LoginForm";
-import { LoginContainer, LoginFormGalssBox, LoginHeading } from "./style";
+import { LoginContainer, LoginFormGlassBox, LoginHeading } from "./style";
 
 const LoginPage = () => {
   return (
     <LoginContainer>
-      <LoginFormGalssBox>
+      <LoginFormGlassBox>
         <Logo />
         <LoginHeading>안녕하세요 나들이입니다.</LoginHeading>
 
         <LoginForm />
-      </LoginFormGalssBox>
+      </LoginFormGlassBox>
     </LoginContainer>
   );
 };
