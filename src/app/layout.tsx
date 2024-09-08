@@ -1,11 +1,7 @@
 import Nav from "@/components/Nav";
 import ClientProviders from "@/components/ClientProviders";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <head>
@@ -19,7 +15,7 @@ export default function RootLayout({
           <header>
             <Nav />
           </header>
-          {children}
+          <main>{children}</main>
         </ClientProviders>
       </body>
     </html>
