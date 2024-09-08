@@ -16,7 +16,6 @@ const routes = [
 
 const NavContainer = styled.nav`
   display: flex;
-  position: fixed;
   max-height: 3rem;
   background-color: white;
   box-shadow: 0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1);
@@ -26,7 +25,7 @@ const NavContainer = styled.nav`
 
 const RoutesWrapper = styled.div`
   display: flex;
-  margin-right: 17.5rem;
+  margin-right: 15.5rem;
 `;
 
 const Route = styled.span<{ primary?: boolean }>`
