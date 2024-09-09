@@ -1,13 +1,8 @@
 "use client";
 
-import { FullScreenContainer } from "@/components/atom/FullScreenContainer";
 import GlassBox from "@/components/atom/GlassBox";
 import Heading from "@/components/atom/Heading";
 import styled from "styled-components";
-
-export const LoginContainer = styled(FullScreenContainer)`
-  background-image: url("/login_background_image.jpg");
-`;
 
 export const LoginHeading = styled(Heading)`
   display: flex;
