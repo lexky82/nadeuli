@@ -6,6 +6,7 @@ import styled from "styled-components";
 import RectIcon from "./RectIcon";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -14,15 +15,18 @@ const routes = [
   { title: "기행문", path: "/travelogue" },
 ];
 
-const NavContainer = styled.nav`
+const NavContainer = styled.nav<{ isScrolling?: boolean }>`
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
+  width: 100%;
+  z-index: 999;
   max-height: 3rem;
-  width: 100vw;
   box-shadow: 0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1);
   padding: 0.5rem 2.5rem;
   align-items: center;
+
+  background-color: ${(props) => (props.isScrolling ? "#ffffff" : "inherit")};
 `;
 
 const RoutesWrapper = styled.div`
@@ -52,7 +56,7 @@ const SearchText = styled.input`
 
 const SearchWrapper = styled.div`
   position: relative;
-  margin-right: 30rem;
+  margin-right: 32rem;
 `;
 
 const IconWrapper = styled.div`
@@ -64,10 +68,23 @@ const noRenderPath = ["/login", "/signup", "/findid", "/findpw"];
 
 export default function Navbar() {
   const currentPath = usePathname();
+  const [scrollY, setScrollY] = useState(0);
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   if (!noRenderPath.includes(currentPath)) {
     return (
-      <NavContainer>
+      <NavContainer isScrolling={scrollY !== 0}>
         <Logo />
 
         <RoutesWrapper>
