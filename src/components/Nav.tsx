@@ -16,8 +16,10 @@ const routes = [
 
 const NavContainer = styled.nav`
   display: flex;
+  position: absolute;
+  top: 0;
   max-height: 3rem;
-  background-color: white;
+  width: 100vw;
   box-shadow: 0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1);
   padding: 0.5rem 2.5rem;
   align-items: center;
@@ -41,6 +43,11 @@ const SearchText = styled.input`
   padding-right: 3.438rem;
   background-color: white;
   border: none;
+  border-radius: 15px;
+
+  &:focus {
+    outline: 1px solid ${(props) => props.theme.colors.primary};
+  }
 `;
 
 const SearchWrapper = styled.div`
@@ -67,7 +74,7 @@ export default function Navbar() {
           {routes.map((route, key) => {
             return (
               <Link key={key} href={route.path}>
-                <Route>{route.title}</Route>
+                <Route primary={route.path === currentPath}>{route.title}</Route>
               </Link>
             );
           })}
@@ -80,7 +87,7 @@ export default function Navbar() {
             alt="searchbutton"
             width={24}
             height={24}
-            style={{ position: "absolute", right: 25, top: 8, marginLeft: 25 }}
+            style={{ position: "absolute", right: 25, top: 5, marginLeft: 25 }}
           />
         </SearchWrapper>
 
