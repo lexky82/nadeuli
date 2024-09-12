@@ -1,34 +1,15 @@
-import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-
-const Title = styled.span`
-  font-weight: bold;
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.primary};
-  margin-left: 8px;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  margin-right: 65px;
-`;
+import * as styles from "../styles/Logo.css";
 
 export default function Logo() {
   return (
     <Link href="/">
-      <LogoWrapper>
-        <Image
-          src="/logo.svg" // public 디렉토리 내의 파일은 '/' 경로로 시작합니다.
-          alt="Logo"
-          width={32} // 로고의 가로 크기
-          height={32} // 로고의 세로 크기
-        />
+      <div className={styles.logoWrapper}>
+        <Image src="/logo.svg" alt="Logo" width={32} height={32} />
 
-        <Title>나들이</Title>
-      </LogoWrapper>
+        <span className={styles.title}>나들이</span>
+      </div>
     </Link>
   );
 }

@@ -1,31 +1,13 @@
-"use client";
-
-import styled from "styled-components";
 import Image from "next/image";
-import GlassBox from "@/components/atom/GlassBox";
+import * as style from "@/styles/components/atom/fullScreenContainer.css";
 import Logo from "@/components/Logo";
-import Heading from "@/components/atom/Heading";
+import * as styles from "./styles.css";
 import SignupForm from "./SignupForm";
-import { FullScreenContainer } from "@/components/atom/FullScreenContainer";
-
-const SignupFormGlassBox = styled(GlassBox)`
-  display: flex;
-  flex-direction: column;
-  width: 720px;
-  height: 720px;
-  padding: 40px;
-`;
-
-export const LoginHeading = styled(Heading)`
-  display: flex;
-  justify-content: center;
-  font-size: 24px;
-  margin-bottom: 45px;
-`;
+import { GlassBox } from "@/components/atom/GlassBox";
 
 const SignupPage = () => {
   return (
-    <FullScreenContainer>
+    <div className={style.fullScreenContainer}>
       <Image
         src="/signup_background_image.jpg"
         alt="signup_cover_image"
@@ -36,13 +18,13 @@ const SignupPage = () => {
           objectFit: "cover",
         }}
       />
-      <SignupFormGlassBox>
+      <GlassBox className={styles.signupFormGlassBox}>
         <Logo />
-        <LoginHeading>환영합니다. 나들이입니다.</LoginHeading>
+        <h1 className={styles.loginHeading}>환영합니다. 나들이입니다.</h1>
 
         <SignupForm />
-      </SignupFormGlassBox>
-    </FullScreenContainer>
+      </GlassBox>
+    </div>
   );
 };
 

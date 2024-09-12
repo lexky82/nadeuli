@@ -1,8 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    reactRefresh: true,
-  },
-};
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
+const withVanillaExtract = createVanillaExtractPlugin();
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default withVanillaExtract(nextConfig);

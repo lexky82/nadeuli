@@ -1,9 +1,13 @@
+import "@/styles/normalize.css";
+import "@/styles/globalTheme.css";
+import "swiper/css";
+
 import Nav from "@/components/Nav";
-import ClientProviders from "@/components/ClientProviders";
+import { themeClass } from "@/styles/globalTheme.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={themeClass}>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
@@ -11,12 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ClientProviders>
-          <header>
-            <Nav />
-          </header>
-          <main>{children}</main>
-        </ClientProviders>
+        <header>
+          <Nav />
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );

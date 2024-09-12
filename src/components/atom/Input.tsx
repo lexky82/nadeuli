@@ -1,19 +1,21 @@
-"use client";
+import * as styles from "@/styles/components/atom/input.css";
 
-import styled from "styled-components";
+interface InputProps {
+  id?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  type?: React.HTMLInputTypeAttribute;
+  placeholder?: string;
+  className?: string;
+}
 
-const Input = styled.input`
-  height: 24px;
-  padding: 10px 15px;
-  background-color: #d9d9d9;
-  border-radius: 15px;
-  outline: none;
-  border: 1px solid ${(props) => props.theme.colors.gray};
-
-  &:focus {
-    background-color: #ffffff;
-    outline: 1px solid ${(props) => props.theme.colors.primary};
-  }
-`;
-
-export default Input;
+export const Input = ({ id, type, placeholder, onChange, className }: InputProps) => {
+  return (
+    <input
+      id={id}
+      type={type}
+      placeholder={placeholder}
+      onChange={onChange}
+      className={`${styles.input} ${className}`}
+    />
+  );
+};

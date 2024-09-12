@@ -1,14 +1,13 @@
-"use client";
-
+import * as styles from "./style.css";
+import * as style from "@/styles/components/atom/fullScreenContainer.css";
 import Logo from "@/components/Logo";
 import LoginForm from "./LoginForm";
-import { LoginFormGlassBox, LoginHeading } from "./style";
 import Image from "next/image";
-import { FullScreenContainer } from "@/components/atom/FullScreenContainer";
+import { GlassBox } from "@/components/atom/GlassBox";
 
 const LoginPage = () => {
   return (
-    <FullScreenContainer>
+    <div className={style.fullScreenContainer}>
       <Image
         src="/login_background_image.jpg"
         alt="login_cover_image"
@@ -19,13 +18,16 @@ const LoginPage = () => {
           objectFit: "cover",
         }}
       />
-      <LoginFormGlassBox>
+      <GlassBox className={styles.loginFormGlassBox}>
         <Logo />
-        <LoginHeading>안녕하세요 나들이입니다.</LoginHeading>
 
-        <LoginForm />
-      </LoginFormGlassBox>
-    </FullScreenContainer>
+        <div className={styles.loginFormWrapper}>
+          <h1 className={styles.loginHeading}>안녕하세요 나들이입니다.</h1>
+
+          <LoginForm />
+        </div>
+      </GlassBox>
+    </div>
   );
 };
 

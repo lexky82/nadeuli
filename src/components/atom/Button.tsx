@@ -1,21 +1,16 @@
-"use client";
+import * as styles from "@/styles/components/atom/button.css";
 
-import styled from "styled-components";
+interface ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  children?: React.ReactNode;
+  className?: string;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+}
 
-const Button = styled.button`
-  cursor: pointer;
-  padding: 10px 17px;
-  color: white !important;
-  border: none;
-  background-color: ${(props) => props.theme.colors.primary};
-  font-size: 12px;
-  font-weight: 300;
-  transition: background-color 0.15s ease;
-  width: 100%;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.secondary};
-  }
-`;
-
-export default Button;
+export const Button = ({ onClick, children, className, type }: ButtonProps) => {
+  return (
+    <button className={`${styles.button} ${className}`} onClick={onClick} type={type}>
+      {children}
+    </button>
+  );
+};

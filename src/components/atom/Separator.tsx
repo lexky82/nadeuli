@@ -1,24 +1,14 @@
-"use client";
+import * as styles from "@/styles/components/atom/separator.css";
 
-import styled from "styled-components";
+interface SeparatorProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-const Separator = styled.div`
-  display: flex;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid black;
-    margin: 0 10px;
-  }
-
-  span {
-    white-space: nowrap;
-  }
-`;
-
-export default Separator;
+export const Separator = ({ children, className }: SeparatorProps) => {
+  return (
+    <div className={`${styles.separator} ${className}`}>
+      <span className={styles.child}>{children}</span>
+    </div>
+  );
+};

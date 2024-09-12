@@ -1,79 +1,84 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { styled } from "styled-components";
-import {
-  FormFieldWrapper,
-  FormInput,
-  GoogleLoginBox,
-  OrSeparator,
-  RecomendSignup,
-  SocialLogin,
-  Submit,
-} from "@/components/form";
 
-const SignupFormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 150px;
-`;
+import * as styles from "./styles.css";
+import * as formStyles from "@/styles/components/form/form.css";
 
-const SignupSubmit = styled(Submit)`
-  margin-top: 15px;
-`;
+import { Separator } from "@/components/atom/Separator";
+import { Input } from "@/components/atom/Input";
+import { Button } from "@/components/atom/Button";
 
 const SignupForm = () => {
   return (
-    <SignupFormContainer>
-      <SocialLogin>
-        <GoogleLoginBox>
+    <div className={styles.signupFormContainer}>
+      <div className={formStyles.socialLogin}>
+        <div className={formStyles.googleLoginBox}>
           <Image src="/web_neutral_rd_na 1.svg" alt="google" width={40} height={40} />
           <span>구글 계정으로 로그인</span>
-        </GoogleLoginBox>
-      </SocialLogin>
+        </div>
+      </div>
 
-      <OrSeparator>
-        <span>or</span>
-      </OrSeparator>
+      <Separator className={formStyles.orSeparator}>or</Separator>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>이메일</label>
-        <FormInput id="email" type="text" placeholder="이메일을 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="email"
+          type="text"
+          placeholder="이메일을 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>휴대전화(-를 제외하고)</label>
-        <FormInput id="phone" type="text" placeholder="휴대전화 번호를 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="phone"
+          type="text"
+          placeholder="휴대전화 번호를 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>닉네임</label>
-        <FormInput id="nickName" type="text" placeholder="닉네임을 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="nickName"
+          type="text"
+          placeholder="닉네임을 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>패스워드</label>
-        <FormInput id="password" type="password" placeholder="패스워드를 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="password"
+          type="password"
+          placeholder="패스워드를 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>패스워드 확인</label>
-        <FormInput
+        <Input
           id="confirmPassword"
           type="password"
           placeholder="입력한 패스워드를 다시 입력해주세요."
+          className={formStyles.formInput}
         />
-      </FormFieldWrapper>
+      </div>
 
-      <SignupSubmit>회원가입</SignupSubmit>
+      <Button type="submit" className={formStyles.submitButton}>
+        회원가입
+      </Button>
 
-      <RecomendSignup>
+      <div className={formStyles.recomendSignup}>
         <span>계정이 있다면?</span>
         <Link href="/login">로그인</Link>
-      </RecomendSignup>
-    </SignupFormContainer>
+      </div>
+    </div>
   );
 };
 

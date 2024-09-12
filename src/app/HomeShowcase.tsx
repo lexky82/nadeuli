@@ -2,10 +2,11 @@
 
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { styled } from "styled-components";
+import * as styles from "@/styles/homeShowcase.css";
 import { useState } from "react";
 import { Controller } from "swiper/modules";
 import Link from "next/link";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 const exampleRecomends = [
   {
@@ -24,31 +25,18 @@ const exampleRecomends = [
   },
 ];
 
-const SliderHeading = styled.h3`
-  font-size: 32px;
-`;
-
-const More = styled.p`
-  margin: 0;
-  text-decoration-line: underline;
-  color: ${(props) => props.theme.colors.gray};
-`;
-
-const MainShowcase = styled.div<{ backColor?: string }>`
-  display: flex;
-  justify-content: center;
-  background: ${(props) => props.backColor};
-  transition: all 1.5s;
-  padding-top: 65px;
-`;
-
 export default function HomeShowcase() {
   const [firstSwiper, setFirstSwiper] = useState<SwiperClass | null>(null);
   const [secondSwiper, setSecondSwiper] = useState<SwiperClass | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <MainShowcase backColor={exampleRecomends && exampleRecomends[currentIndex].backColor}>
+    <div
+      className={styles.mainShowcase}
+      style={assignInlineVars({
+        [styles.msCaseBackColor]: exampleRecomends && exampleRecomends[currentIndex].backColor,
+      })}
+    >
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
@@ -68,9 +56,9 @@ export default function HomeShowcase() {
               }}
             >
               <div>
-                <SliderHeading>{recomend.title}</SliderHeading>
+                <h3 className={styles.sliderHeading}>{recomend.title}</h3>
                 <Link href={recomend.more}>
-                  <More>자세히보기</More>
+                  <p className={styles.more}>자세히보기</p>
                 </Link>
               </div>
             </div>
@@ -92,6 +80,6 @@ export default function HomeShowcase() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </MainShowcase>
+    </div>
   );
 }

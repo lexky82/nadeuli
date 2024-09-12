@@ -1,60 +1,66 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FormFieldWrapper,
-  FormInput,
-  Submit,
-  RecomendSignup,
-  OrSeparator,
-  SocialLogin,
-  GoogleLoginBox,
-} from "@/components/form";
-import { LoginFormWrapper, LoginOptionsWrapper, AutoLoginCheckbox, FindLinkBox } from "./style";
+
+import * as formStyles from "@/styles/components/form/form.css";
+import * as styles from "./style.css";
+
+import { Input } from "@/components/atom/Input";
+import { Button } from "@/components/atom/Button";
+import { Separator } from "@/components/atom/Separator";
 
 const LoginForm = () => {
   return (
-    <LoginFormWrapper>
-      <FormFieldWrapper>
+    <div className={styles.loginFormWrapper}>
+      <div className={formStyles.formFieldWrapper}>
         <label>이메일</label>
-        <FormInput id="email" type="text" placeholder="이메일을 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="email"
+          type="text"
+          placeholder="이메일을 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <FormFieldWrapper>
+      <div className={formStyles.formFieldWrapper}>
         <label>패스워드</label>
-        <FormInput id="password" type="password" placeholder="패스워드를 입력해주세요." />
-      </FormFieldWrapper>
+        <Input
+          id="password"
+          type="password"
+          placeholder="패스워드를 입력해주세요."
+          className={formStyles.formInput}
+        />
+      </div>
 
-      <LoginOptionsWrapper>
-        <AutoLoginCheckbox>
+      <div className={styles.loginOptionsWrapper}>
+        <div className={styles.autoLoginCheckbox}>
           <input type="checkbox" name="autoLogin" id="autoLogin" />
           <span>자동 로그인</span>
-        </AutoLoginCheckbox>
+        </div>
 
-        <FindLinkBox>
+        <div className={styles.findLinkBox}>
           <Link href="/findid">이메일 찾기</Link>
           <Link href="/findpw">패스워드 찾기</Link>
-        </FindLinkBox>
-      </LoginOptionsWrapper>
+        </div>
+      </div>
 
-      <Submit type="submit">로그인</Submit>
+      <Button type="submit" className={formStyles.submitButton}>
+        로그인
+      </Button>
 
-      <RecomendSignup>
+      <div className={formStyles.recomendSignup}>
         <span>계정이 없다면?</span>
         <Link href="/signup">회원가입</Link>
-      </RecomendSignup>
+      </div>
 
-      <OrSeparator>
-        <span>or</span>
-      </OrSeparator>
+      <Separator className={formStyles.orSeparator}>or</Separator>
 
-      <SocialLogin>
-        <GoogleLoginBox>
+      <div className={formStyles.socialLogin}>
+        <div className={formStyles.googleLoginBox}>
           <Image src="/web_neutral_rd_na 1.svg" alt="google" width={40} height={40} />
           <span>구글 계정으로 로그인</span>
-        </GoogleLoginBox>
-      </SocialLogin>
-    </LoginFormWrapper>
+        </div>
+      </div>
+    </div>
   );
 };
 
