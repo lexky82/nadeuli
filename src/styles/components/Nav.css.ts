@@ -13,8 +13,14 @@ export const navContainer = style({
   boxShadow: "0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1)",
   padding: "0.5rem 2.5rem",
   alignItems: "center",
-
   backgroundColor: navBackColor,
+
+  ":hover": {
+    backgroundColor: "#ffffff",
+  },
+  ":focus": {
+    backgroundColor: "#ffffff",
+  },
 });
 
 export const routesWrapper = style({
@@ -26,6 +32,10 @@ export const route = style({
   color: themeVars.colors.gray,
   marginRight: "1.125rem",
   fontSize: "1.25rem",
+
+  ":hover": {
+    color: themeVars.colors.primary,
+  },
 });
 
 export const primaryRoute = style({
