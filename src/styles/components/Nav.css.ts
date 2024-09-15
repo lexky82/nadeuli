@@ -2,18 +2,21 @@ import { createVar, style } from "@vanilla-extract/css";
 import { themeVars } from "@/styles/globalTheme.css";
 
 export const navBackColor = createVar();
+export const navPositon = createVar();
+export const navWidth = createVar();
 
 export const navContainer = style({
   display: "flex",
-  position: "fixed",
-  top: 0,
-  width: "100%",
   zIndex: 999,
-  maxHeight: "3rem",
+  justifyContent: "space-between",
   boxShadow: "0px 0.313rem 0.313rem rgba(0, 0, 0, 0.1)",
   padding: "0.5rem 2.5rem",
   alignItems: "center",
   backgroundColor: navBackColor,
+
+  position: navPositon,
+  top: 0,
+  width: navWidth,
 
   ":hover": {
     backgroundColor: "#ffffff",
@@ -25,12 +28,11 @@ export const navContainer = style({
 
 export const routesWrapper = style({
   display: "flex",
-  marginRight: "15.5rem",
+  gap: 18,
 });
 
 export const route = style({
   color: themeVars.colors.gray,
-  marginRight: "1.125rem",
   fontSize: "1.25rem",
 
   ":hover": {
@@ -40,7 +42,6 @@ export const route = style({
 
 export const primaryRoute = style({
   color: themeVars.colors.primary,
-  marginRight: "1.125rem",
   fontSize: "1.25rem",
 });
 
@@ -58,9 +59,14 @@ export const searchText = style({
   },
 });
 
-export const searchWrapper = style({
+export const searchContainer = style({
+  display: "flex",
+  justifyContent: "center",
+  flexGrow: 1,
+});
+
+export const searchBarWrapper = style({
   position: "relative",
-  marginRight: "32rem",
 });
 
 export const iconWrapper = style({

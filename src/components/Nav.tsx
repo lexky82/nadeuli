@@ -39,11 +39,13 @@ export default function Navbar() {
         className={styles.navContainer}
         style={assignInlineVars({
           [styles.navBackColor]: scrollY !== 0 ? "#fff" : "inherit",
+          [styles.navPositon]: currentPath !== "/" ? "sticky" : "fixed",
+          [styles.navWidth]: currentPath !== "/" ? "auto" : "calc(100% - 5rem)",
         })}
       >
         <Logo />
 
-        <div className={styles.routesWrapper}>
+        <ul className={styles.routesWrapper}>
           {routes.map((route, key) => {
             return (
               <Link key={key} href={route.path}>
@@ -53,21 +55,23 @@ export default function Navbar() {
               </Link>
             );
           })}
-        </div>
+        </ul>
 
-        <div className={styles.searchWrapper}>
-          <input
-            className={styles.searchText}
-            type="text"
-            placeholder="지역이나 유적지를 검색해보세요!"
-          />
-          <Image
-            src="/Search.svg"
-            alt="searchbutton"
-            width={24}
-            height={24}
-            className={styles.searchIcon}
-          />
+        <div className={styles.searchContainer}>
+          <div className={styles.searchBarWrapper}>
+            <input
+              className={styles.searchText}
+              type="text"
+              placeholder="지역이나 유적지를 검색해보세요!"
+            />
+            <Image
+              src="/Search.svg"
+              alt="searchbutton"
+              width={24}
+              height={24}
+              className={styles.searchIcon}
+            />
+          </div>
         </div>
 
         <div className={styles.iconWrapper}>
