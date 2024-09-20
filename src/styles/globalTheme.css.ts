@@ -18,6 +18,10 @@ globalStyle("html, body", {
   margin: 0,
 });
 
+globalStyle("svg", {
+  userSelect: "none",
+});
+
 globalStyle("a", {
   textDecoration: "none",
 });
@@ -25,6 +29,14 @@ globalStyle("a", {
 globalStyle("input", {
   fontFamily: "Noto Sans KR",
   fontSize: 16,
+});
+
+globalStyle("p", {
+  margin: 5,
+});
+
+globalStyle("h2", {
+  margin: 0,
 });
 
 globalStyle("input::placeholder", {
