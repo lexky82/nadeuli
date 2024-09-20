@@ -9,9 +9,9 @@ interface mapOptionType {
 }
 
 const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
-  const initializeMap = useCallback(() => {
-    let nmap: naver.maps.Map;
+  let nmap: naver.maps.Map;
 
+  const initializeMap = useCallback(() => {
     nmap = new naver.maps.Map(mapId, {
       center: center
         ? new naver.maps.LatLng(...center)
@@ -21,8 +21,32 @@ const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
     });
   }, []);
 
+  const addMapEvent = useCallback(
+    (eventName: string, handler: (e: naver.maps.PointerEvent) => void) => {
+      if (nmap) {
+        naver.maps.Event.addListener(nmap, eventName, handler);
+      }
+    },
+    []
+  );
+
+  const mapMarker = useCallback(
+    ({ position, title }: { position: [number, number]; title: string }) => {
+      if (nmap) {
+        const marker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(...position),
+          map: nmap,
+          title,
+        });
+      }
+    },
+    []
+  );
+
   return {
     initializeMap,
+    addMapEvent,
+    mapMarker,
   };
 };
 
