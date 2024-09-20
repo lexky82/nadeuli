@@ -4,7 +4,7 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import * as styles from "@/styles/homeShowcase.css";
 import { useState } from "react";
-import { Controller } from "swiper/modules";
+import { Autoplay, Controller } from "swiper/modules";
 import Link from "next/link";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
@@ -40,10 +40,11 @@ export default function HomeShowcase() {
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
-        modules={[Controller]}
+        modules={[Controller, Autoplay]}
         onSwiper={setFirstSwiper}
         onSlideChange={(e) => setCurrentIndex(e.activeIndex)}
         controller={{ control: secondSwiper }}
+        autoplay
       >
         {exampleRecomends.map((recomend, key) => (
           <SwiperSlide key={key}>
