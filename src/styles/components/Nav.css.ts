@@ -17,13 +17,6 @@ export const navContainer = style({
   position: navPositon,
   top: 0,
   width: navWidth,
-
-  ":hover": {
-    backgroundColor: "#ffffff",
-  },
-  ":focus": {
-    backgroundColor: "#ffffff",
-  },
 });
 
 export const routesWrapper = style({
