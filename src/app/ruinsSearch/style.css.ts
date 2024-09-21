@@ -56,6 +56,7 @@ export const contentsWrapper = style({
 });
 
 export const thumbnailImage = style({
+  cursor: "pointer",
   borderRadius: 5,
 });
 
