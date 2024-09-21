@@ -1,5 +1,50 @@
 import Image from "next/image";
 
+export const mapContentsType = [
+  "고분",
+  "고택",
+  "고궁",
+  "방어시설",
+  "유적·사적",
+  "터",
+  "서원",
+  "사찰",
+];
+
+export const mapContents = [
+  {
+    id: 1,
+    thumnail:
+      "https://flexible.img.hani.co.kr/flexible/normal/970/546/imgdb/original/2022/1209/20221209501200.jpg",
+    title: "example",
+    location: "충청북도 보은군 보은읍 성주1길 104",
+    fromMyLocation: 134.7,
+    travelessayCount: 104,
+    viewDetail: "",
+  },
+  {
+    id: 2,
+    thumnail:
+      "https://flexible.img.hani.co.kr/flexible/normal/970/546/imgdb/original/2022/1209/20221209501200.jpg",
+    title: "example",
+    location: "서울 동대문구 망우로21길 52 C동 지하1층",
+    fromMyLocation: 134.7,
+    travelessayCount: 104,
+    viewDetail: "",
+  },
+  {
+    id: 2,
+
+    thumnail:
+      "https://flexible.img.hani.co.kr/flexible/normal/970/546/imgdb/original/2022/1209/20221209501200.jpg",
+    title: "example",
+    location: "서울 동대문구 망우로21길 52 C동 지하1층",
+    fromMyLocation: 134.7,
+    travelessayCount: 104,
+    viewDetail: "",
+  },
+];
+
 export const exmapleFetchData = {
   images: [
     { image: "/20221209501200.jpg", alt: "삼년산성 성벽" },
