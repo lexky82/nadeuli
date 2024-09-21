@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 const routes = [
   { title: "홈", path: "/" },
   { title: "유적지 찾기", path: "/ruinsSearch" },
-  { title: "유적지 정보", path: "/ruinsInfo" },
+  { title: "유적지 정보", path: "/ruinsInformation" },
   { title: "기행문", path: "/travelogue" },
 ];
 
