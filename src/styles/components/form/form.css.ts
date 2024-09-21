@@ -37,4 +37,5 @@ export const submitButton = style({
   borderRadius: 15,
   fontSize: 16,
   height: 40,
+  marginBottom: 5,
 });
