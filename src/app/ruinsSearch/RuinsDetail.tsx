@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as styles from "./ruinsDetail.style.css";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Keyboard, Mousewheel } from "swiper/modules";
 import Link from "next/link";
 import Tabs from "@/components/Tabs";
 import { TabData, exmapleFetchData } from "../exampleData";
@@ -24,11 +24,13 @@ const RuinsDetail = ({ ruinsId, closeDetailPanel }: RuinsDetailProps) => {
     <div className={styles.ruinsDetailContainer}>
       <div className={styles.ruinsDetailWrapper}>
         <Swiper
+          keyboard
+          mousewheel
           onSwiper={(swiper) => setSwiper(swiper)}
           onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
           spaceBetween={20}
           slidesPerView={1}
-          modules={[Pagination, Navigation]}
+          modules={[Pagination, Navigation, Keyboard, Mousewheel]}
         >
           {exmapleFetchData.images.map((imageInfo, key) => (
             <SwiperSlide key={key}>
