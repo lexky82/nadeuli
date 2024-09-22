@@ -86,7 +86,7 @@ export const exmapleFetchData = {
       createAt: "",
     },
   ],
-  viewDetail: "",
+  viewDetail: "/ruinsInformation/21",
 };
 
 export const TabData = [
@@ -137,5 +137,76 @@ export const TabData = [
     key: 1,
     label: "간단 후기",
     children: <div>간단후기 예시</div>,
+  },
+];
+
+export const columns = [
+  {
+    title: "제목",
+    dataIndex: "title",
+    render: (text: string) => <h4 style={{ width: 200, fontSize: 20 }}>{text}</h4>,
+  },
+  {
+    title: "내용",
+    dataIndex: "contents",
+  },
+  {
+    title: "댓글",
+    dataIndex: "commentCount",
+  },
+  {
+    title: "추천",
+    dataIndex: "thumbsUp",
+  },
+  {
+    title: "작성자",
+    dataIndex: "writer",
+  },
+  {
+    title: "작성일",
+    dataIndex: "createAt",
+  },
+];
+
+export const dataSource = [
+  {
+    key: "1",
+    title: "신라의 영혼...",
+    contents:
+      "보은 삼년산성은 우리나라 대표 석축산성으로 신라 자비마립간 13년 470에 축조되었고 소지마립간8년486",
+    commentCount: 4,
+    thumbsUp: 12,
+    writer: "으워오",
+    createAt: "2024.08.16",
+  },
+  {
+    key: "1",
+    title: "신라의 영혼...",
+    contents:
+      "보은 삼년산성은 우리나라 대표 석축산성으로 신라 자비마립간 13년 470에 축조되었고 소지마립간8년486",
+    commentCount: 4,
+    thumbsUp: 12,
+    writer: "으워오",
+    createAt: "2024.08.16",
+  },
+  {
+    key: "1",
+    title: "신라의 영혼...",
+    contents:
+      "보은 삼년산성은 우리나라 대표 석축산성으로 신라 자비마립간 13년 470에 축조되었고 소지마립간8년486",
+    commentCount: 4,
+    thumbsUp: 12,
+    writer: "으워오",
+    createAt: "2024.08.16",
+  },
+  {
+    key: "1",
+    title: "신라의 영혼...",
+    contents:
+      "보은 삼년산성은 우리나라 대표 석축산성으로 신라 자비마립간 13년 470에 축조되었고 소지마립간8년486",
+    commentCount: 4,
+    thumbsUp: 12,
+    writer: "으워오",
+    createAt: "2024.08.16",
   },
 ];
