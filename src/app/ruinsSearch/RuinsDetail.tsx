@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Pagination, Navigation, Keyboard, Mousewheel } from "swiper/modules";
 import Link from "next/link";
 import Tabs from "@/components/Tabs";
-import { TabData, exmapleFetchData } from "../exampleData";
+import { TabData, exmapleFetchData } from "../../utils/exampleData";
 
 interface RuinsDetailProps {
   ruinsId: number | null;

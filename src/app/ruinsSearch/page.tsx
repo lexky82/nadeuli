@@ -5,7 +5,7 @@ import NaverMap from "./NaverMap";
 import { useState } from "react";
 import RuinsDetail from "./RuinsDetail";
 import * as styles from "./style.css";
-import { mapContentsType, mapContents } from "../exampleData";
+import { mapContentsType, mapContents } from "../../utils/exampleData";
 
 const runinsSearchPage = ({}) => {
   const [selectedRuins, setSelectedRuins] = useState<number | null>(null);
