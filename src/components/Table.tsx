@@ -30,10 +30,10 @@ export const Table = ({ columns, dataSource }: TableProps) => {
       </thead>
 
       <tbody>
-        {dataSource.map((data) => (
-          <tr key={data.key}>
-            {columns.map((column) => (
-              <td key={column.dataIndex} className={styles.tableRow}>
+        {dataSource.map((data, i) => (
+          <tr key={i}>
+            {columns.map((column, key) => (
+              <td key={key} className={styles.tableRow}>
                 {column.render ? column.render(data[column.dataIndex]) : data[column.dataIndex]}
               </td>
             ))}
