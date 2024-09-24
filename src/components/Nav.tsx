@@ -4,7 +4,7 @@ import * as styles from "../styles/components/Nav.css";
 import Link from "next/link";
 import Image from "next/image";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import Logo from "./Logo";
+import Logo from "./atom/Logo";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 

@@ -1,6 +1,6 @@
 import * as styles from "./style.css";
 import * as style from "@/styles/components/atom/fullScreenContainer.css";
-import Logo from "@/components/Logo";
+import Logo from "@/components/atom/Logo";
 import LoginForm from "./LoginForm";
 import Image from "next/image";
 import { GlassBox } from "@/components/atom/GlassBox";
