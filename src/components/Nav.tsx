@@ -49,7 +49,13 @@ export default function Navbar() {
           {routes.map((route, key) => {
             return (
               <Link key={key} href={route.path}>
-                <span className={route.path === currentPath ? styles.primaryRoute : styles.route}>
+                <span
+                  className={
+                    route.path === `/${currentPath.split("/")[1]}`
+                      ? styles.primaryRoute
+                      : styles.route
+                  }
+                >
                   {route.title}
                 </span>
               </Link>
