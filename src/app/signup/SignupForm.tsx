@@ -11,6 +11,8 @@ import { Input } from "@/components/atom/Input";
 import { Button } from "@/components/atom/Button";
 import { useForm } from "@/hook/useForm";
 import { signupSchema } from "@/utils/validate";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import * as Vars from "@/styles/components/atom/input.css";
 
 const SignupForm = () => {
   const { formData, errors, handleChange } = useForm(
@@ -39,76 +41,82 @@ const SignupForm = () => {
 
       <Separator className={formStyles.orSeparator}>or</Separator>
 
-      <div className={formStyles.formFieldWrapper}>
-        <label htmlFor="email">이메일</label>
-        <Input
-          id="email"
-          type="text"
-          placeholder="이메일을 입력해주세요."
-          className={formStyles.formInput}
-          required
-          onChange={handleChange}
-        />
-        {/* 
-        {errors.email && formData.email && (
-          <div className={formStyles.fieldErrorMessage}>
-            <span>{errors.email}</span>
+      <div className={styles.signupInputWrapper}>
+        <div className={formStyles.formFieldContainer}>
+          <label htmlFor="email">이메일</label>
+          <div className={formStyles.formInputWrapper}>
+            <Input
+              id="email"
+              type="text"
+              placeholder="이메일을 입력해주세요."
+              className={formStyles.formInput}
+              required
+              onChange={handleChange}
+              style={assignInlineVars({
+                [Vars.formInputState]: "1px solid red",
+              })}
+            />
+
+            <span className={formStyles.emailVerification}>이메일 인증</span>
+
+            {errors.email && formData.email && (
+              <div className={formStyles.fieldErrorMessage}>
+                <p>
+                  <p style={{ fontSize: 12 }}>{errors.email}</p>
+                </p>
+              </div>
+            )}
           </div>
-        )} */}
-      </div>
+        </div>
 
-      <div className={formStyles.formFieldWrapper}>
-        <label htmlFor="phone">휴대전화(-를 제외하고)</label>
-        <Input
-          id="phone"
-          type="text"
-          placeholder="휴대전화 번호를 입력해주세요."
-          className={formStyles.formInput}
-          required
-          onChange={handleChange}
-        />
-      </div>
+        <div className={formStyles.formFieldContainer}>
+          <label htmlFor="nickName">닉네임</label>
+          <Input
+            id="nickName"
+            type="text"
+            placeholder="닉네임을 입력해주세요."
+            className={formStyles.formInput}
+            required
+            onChange={handleChange}
+          />
+        </div>
 
-      <div className={formStyles.formFieldWrapper}>
-        <label htmlFor="nickName">닉네임</label>
-        <Input
-          id="nickName"
-          type="text"
-          placeholder="닉네임을 입력해주세요."
-          className={formStyles.formInput}
-          required
-          onChange={handleChange}
-        />
-      </div>
+        <div className={formStyles.formFieldContainer}>
+          <label htmlFor="password">패스워드</label>
+          <div className={formStyles.formInputWrapper}>
+            <Input
+              id="password"
+              type="password"
+              placeholder="패스워드를 입력해주세요."
+              className={formStyles.formInput}
+              required
+              onChange={handleChange}
+            />
 
-      <div className={formStyles.formFieldWrapper}>
-        <label htmlFor="password">패스워드</label>
-        <Input
-          id="password"
-          type="password"
-          placeholder="패스워드를 입력해주세요."
-          className={formStyles.formInput}
-          required
-          onChange={handleChange}
-        />
-        {/* 
-        {errors.password && formData.password && (
-          <div className={formStyles.fieldErrorMessage}>
-            <span>{errors.password}</span>
+            {errors.password && formData.password && (
+              <div className={formStyles.fieldErrorMessage}>
+                <p>
+                  <p style={{ fontSize: 12 }}>{errors.password}</p>
+                </p>
+              </div>
+            )}
           </div>
-        )} */}
-      </div>
+        </div>
 
-      <div className={formStyles.formFieldWrapper}>
-        <label htmlFor="confirmPassword">패스워드 확인</label>
-        <Input
-          id="confirmPassword"
-          type="password"
-          placeholder="입력한 패스워드를 다시 입력해주세요."
-          className={formStyles.formInput}
-          required
-          onChange={handleChange}
-        />
+        <div className={formStyles.formFieldContainer}>
+          <label htmlFor="confirmPassword">패스워드 확인</label>
+
+          <div className={formStyles.formInputWrapper}>
+            <Input
+              id="confirmPassword"
+              type="password"
+              placeholder="입력한 패스워드를 다시 입력해주세요."
+              className={formStyles.formInput}
+              required
+              onChange={handleChange}
+            />
+          </div>
+        </div>
       </div>
 
       <Button type="submit" className={formStyles.submitButton}>
