@@ -82,7 +82,7 @@ export const ScrollComponent = () => {
         위치
       </span>
       <span
-        onClick={() => scrollToTarget(" references")}
+        onClick={() => scrollToTarget("references")}
         style={{
           color: "#0033A0",
           textDecoration: "underline",
