@@ -1,17 +1,23 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 import { themeVars } from "@/styles/globalTheme.css";
 
+export const formInputState = createVar();
+
 export const input = style({
-  height: 24,
   padding: "10px 15px",
   backgroundColor: "#d9d9d9",
   borderRadius: 15,
-  transition: "background-color 0.1s ease",
+  transition: "all 0.2s ease",
   outline: "none",
-  border: `1px solid ${themeVars.colors.gray}`,
+  width: "100%",
+  border: `${formInputState} !important`,
+  boxSizing: "border-box",
+
+  ":hover": {
+    backgroundColor: "#ffffff",
+  },
 
   ":focus": {
     backgroundColor: "#ffffff",
-    outline: `1px solid ${themeVars.colors.primary}`,
   },
 });
