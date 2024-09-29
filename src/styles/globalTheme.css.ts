@@ -40,5 +40,5 @@ globalStyle("h2", {
 });
 
 globalStyle("input::placeholder", {
-  color: "#C1C3C3",
+  color: "black",
 });
