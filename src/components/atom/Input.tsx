@@ -6,9 +6,17 @@ interface InputProps {
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   className?: string;
+  required?: boolean;
 }
 
-export const Input = ({ id, type, placeholder, onChange, className }: InputProps) => {
+export const Input = ({
+  id,
+  type,
+  placeholder,
+  onChange,
+  className,
+  required = false,
+}: InputProps) => {
   return (
     <input
       id={id}
@@ -16,6 +24,7 @@ export const Input = ({ id, type, placeholder, onChange, className }: InputProps
       placeholder={placeholder}
       onChange={onChange}
       className={`${styles.input} ${className}`}
+      required={required}
     />
   );
 };
