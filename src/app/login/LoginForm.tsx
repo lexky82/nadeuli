@@ -11,7 +11,7 @@ import { Separator } from "@/components/atom/Separator";
 const LoginForm = () => {
   return (
     <div className={styles.loginFormWrapper}>
-      <div className={formStyles.formFieldWrapper}>
+      <div className={formStyles.formFieldContainer}>
         <label>이메일</label>
         <Input
           id="email"
@@ -21,7 +21,7 @@ const LoginForm = () => {
         />
       </div>
 
-      <div className={formStyles.formFieldWrapper}>
+      <div className={formStyles.formFieldContainer}>
         <label>패스워드</label>
         <Input
           id="password"
