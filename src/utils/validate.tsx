@@ -8,6 +8,7 @@ export const signupSchema = z.object({
     .string()
     .min(8, "8자 이상 16자 이하")
     .max(16, "8자 이상 16자 이하")
-    .regex(/\d/, "숫자 조합 사용"),
+    .regex(/\d/, "숫자 조합 사용")
+    .regex(/[!@#$%^&*(),.?":{}|<>]/, "특수 문자 포함 사용"),
   passwordConfirm: z.string(),
 });
