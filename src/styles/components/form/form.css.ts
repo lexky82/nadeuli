@@ -11,6 +11,20 @@ export const formInput = style({
   marginTop: 5,
 });
 
+export const fieldErrorMessage = style({
+  position: "absolute",
+  width: 180,
+  height: 50,
+  right: -10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  background: "white",
+  padding: 10,
+  borderRadius: 30,
+});
+
 export const recomendSignup = style({
   display: "flex",
   gap: 5,
