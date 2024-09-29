@@ -5,11 +5,12 @@ interface ButtonProps {
   children?: React.ReactNode;
   className?: string;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  style?: React.CSSProperties;
 }
 
-export const Button = ({ onClick, children, className, type }: ButtonProps) => {
+export const Button = ({ onClick, children, className, type, style }: ButtonProps) => {
   return (
-    <button className={`${styles.button} ${className}`} onClick={onClick} type={type}>
+    <button style={style} className={`${styles.button} ${className}`} onClick={onClick} type={type}>
       {children}
     </button>
   );
