@@ -17,7 +17,7 @@ export const Chapter = ({ id, title, children }: ChapterProps) => {
       >
         {title}
       </p>
-      {children}
+      <div style={{ padding: "20px 10px" }}>{children}</div>
     </div>
   );
 };
