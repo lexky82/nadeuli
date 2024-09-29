@@ -1,28 +1,42 @@
-import { style } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
 
-export const formFieldWrapper = style({
+export const formFieldContainer = style({
   display: "flex",
   flexDirection: "column",
   width: "100%",
 });
 
 export const formInput = style({
-  marginBottom: 10,
+  position: "relative",
   marginTop: 5,
+});
+
+export const formInputWrapper = style({
+  position: "relative",
+});
+
+export const emailVerification = style({
+  position: "absolute",
+  right: 15,
+  top: "calc(25% + 5px)",
+  color: "blue",
+  cursor: "pointer",
+  fontSize: 14,
 });
 
 export const fieldErrorMessage = style({
   position: "absolute",
-  width: 180,
-  height: 50,
-  right: -10,
+  width: 200,
+  height: "80",
+  right: -215,
+  fontSize: 12,
+  top: "calc(25% - 8px)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  textAlign: "center",
-  background: "white",
-  padding: 10,
-  borderRadius: 30,
+  background: "#222",
+  padding: 3,
+  color: "white",
 });
 
 export const recomendSignup = style({
