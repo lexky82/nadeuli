@@ -6,6 +6,7 @@ import { Chapter } from "./clientComponents/Chapter";
 import { ScrollComponent } from "./clientComponents/ScrollComponent";
 import { ImageSlide } from "./clientComponents/ImageSlide";
 import { Location } from "./clientComponents/Location";
+import WrappedReactQuill from "./clientComponents/ReviewEditor";
 
 interface Params {
   params: {
@@ -16,7 +17,7 @@ interface Params {
 const RuinsInformation = ({ params }: Params) => {
   return (
     <div>
-      <div style={{ position: "relative", width: "100%", height: "400px" }} id="top">
+      <div style={{ position: "relative", width: "100%", height: "250px" }} id="top">
         <Image
           src="/ruinsTopExampe.jpg"
           alt="exa"
@@ -113,12 +114,38 @@ const RuinsInformation = ({ params }: Params) => {
 
           <Chapter id="location" title="위치">
             <Location mapId={`${params.ruinsId}`} />
+            충청북도 보은군 보은읍 성주1길 104 (어암리)
           </Chapter>
 
-          <Chapter id="references" title="참고자료"></Chapter>
+          <Chapter id="references" title="관련 자료">
+            <div
+              style={{ display: "flex", alignContent: "center", justifyContent: "center", gap: 8 }}
+            >
+              <Image
+                src="/encykorea_logo.png"
+                alt="한국민족문화대백과사전"
+                width={24}
+                height={24}
+              />
 
-          <Chapter id="review" title="간단후기">
-            <div id="editor" />
+              <a target="_blank" href="https://encykorea.aks.ac.kr/Article/E0026508">
+                https://encykorea.aks.ac.kr/Article/E0026508
+              </a>
+            </div>
+
+            <div
+              style={{ display: "flex", alignContent: "center", justifyContent: "center", gap: 8 }}
+            >
+              <Image src="/namuwiki_logo.svg" alt="나무위키" width={24} height={24} />
+
+              <a target="_blank" href="https://namu.wiki/w/%EC%82%BC%EB%85%84%EC%82%B0%EC%84%B1">
+                https://namu.wiki/w/%EC%82%BC%EB%85%84%EC%82%B0%EC%84%B1
+              </a>
+            </div>
+          </Chapter>
+
+          <Chapter id="review" title="간단 후기">
+            <WrappedReactQuill />
           </Chapter>
         </div>
       </div>
