@@ -1,4 +1,5 @@
 import * as styles from "@/styles/components/atom/input.css";
+import { CSSProperties } from "react";
 
 interface InputProps {
   id?: string;
@@ -7,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   required?: boolean;
+  style?: CSSProperties;
 }
 
 export const Input = ({
@@ -16,6 +18,7 @@ export const Input = ({
   onChange,
   className,
   required = false,
+  style,
 }: InputProps) => {
   return (
     <input
@@ -25,6 +28,7 @@ export const Input = ({
       onChange={onChange}
       className={`${styles.input} ${className}`}
       required={required}
+      style={style}
     />
   );
 };
