@@ -17,7 +17,12 @@ export const loginFormGlassBox = style({
   padding: 40,
 });
 
-export const loginFormContainer = style({});
+export const loginInputWrapper = style({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  gap: 10,
+});
 
 export const loginFormWrapper = style({
   display: "flex",

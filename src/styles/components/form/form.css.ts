@@ -42,7 +42,6 @@ export const fieldErrorMessage = style({
 export const recomendSignup = style({
   display: "flex",
   gap: 5,
-  marginBottom: 15,
 });
 
 export const socialLogin = style({});
