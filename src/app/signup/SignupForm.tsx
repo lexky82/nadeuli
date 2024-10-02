@@ -21,7 +21,7 @@ const SignupForm = () => {
       phone: "",
       nickName: "",
       password: "",
-      passwordConfirm: "",
+      confirmPassword: "",
     },
     signupSchema
   );
@@ -29,6 +29,18 @@ const SignupForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+  const formStateAction = (type: string) => {
+    const actions = {
+      success: "1px solid green",
+      warning: "1px solid red",
+      default: "1px solid #c1c1c9",
+    } as const;
+
+    return actions[type as keyof typeof actions] || actions["default"];
+  };
+
+  const emailBlurHandler = () => {};
 
   return (
     <form onSubmit={handleSubmit} className={styles.signupFormContainer}>
@@ -44,7 +56,7 @@ const SignupForm = () => {
       <div className={styles.signupInputWrapper}>
         <div className={formStyles.formFieldContainer}>
           <label htmlFor="email">이메일</label>
-          <div className={formStyles.formInputWrapper}>
+          <div className={formStyles.formInputWrapper} onBlur={emailBlurHandler}>
             <Input
               id="email"
               type="text"
@@ -53,7 +65,9 @@ const SignupForm = () => {
               required
               onChange={handleChange}
               style={assignInlineVars({
-                [Vars.formInputState]: "1px solid red",
+                [Vars.formInputState]: formStateAction(
+                  formData.email ? (errors.email ? "warning" : "success") : "defalut"
+                ),
               })}
             />
 
@@ -91,6 +105,11 @@ const SignupForm = () => {
               className={formStyles.formInput}
               required
               onChange={handleChange}
+              style={assignInlineVars({
+                [Vars.formInputState]: formStateAction(
+                  formData.password ? (errors.password ? "warning" : "success") : "defalut"
+                ),
+              })}
             />
 
             {errors.password && formData.password && (
@@ -110,11 +129,28 @@ const SignupForm = () => {
             <Input
               id="confirmPassword"
               type="password"
-              placeholder="입력한 패스워드를 다시 입력해주세요."
+              placeholder="패스워드를 다시 입력해주세요."
               className={formStyles.formInput}
               required
               onChange={handleChange}
+              style={assignInlineVars({
+                [Vars.formInputState]: formStateAction(
+                  formData.confirmPassword
+                    ? errors.confirmPassword
+                      ? "warning"
+                      : "success"
+                    : "defalut"
+                ),
+              })}
             />
+
+            {errors.confirmPassword && formData.confirmPassword && (
+              <div className={formStyles.fieldErrorMessage}>
+                <p>
+                  <p style={{ fontSize: 12 }}>{errors.confirmPassword}</p>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
