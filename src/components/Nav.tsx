@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Logo from "./atom/Logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const routes = [
@@ -19,6 +19,8 @@ const noRenderPath = ["/login", "/signup", "/findid", "/findpw"];
 
 export default function Navbar() {
   const currentPath = usePathname();
+  const router = useRouter();
+
   const [scrollY, setScrollY] = useState(0);
 
   const handleScroll = () => {
@@ -32,6 +34,10 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const profileClickHandler = () => {
+    router.push("/login");
+  };
 
   if (!noRenderPath.includes(currentPath)) {
     return (
@@ -94,9 +100,16 @@ export default function Navbar() {
             src="/Notifications.svg"
             width={40}
             height={40}
-            alt="write"
+            alt="notifications"
           />
-          <Image className={styles.rectIcon} src="/Person.svg" width={40} height={40} alt="write" />
+          <Image
+            onClick={profileClickHandler}
+            className={styles.rectIcon}
+            src="/Person.svg"
+            width={40}
+            height={40}
+            alt="profile"
+          />
         </div>
       </nav>
     );
