@@ -5,6 +5,7 @@ import "swiper/css";
 import Nav from "@/components/Nav";
 import { themeClass } from "@/styles/globalTheme.css";
 import Script from "next/script";
+import Toast from "@/components/Toast";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
 
         <main>{children}</main>
+        <Toast />
       </body>
     </html>
   );
