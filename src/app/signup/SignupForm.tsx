@@ -13,6 +13,7 @@ import { useForm } from "@/hook/useForm";
 import { signupSchema } from "@/utils/validate";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import * as Vars from "@/styles/components/atom/input.css";
+import axios from "axios";
 
 const SignupForm = () => {
   const { formData, errors, handleChange } = useForm(
@@ -28,6 +29,20 @@ const SignupForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  };
+
+  const sendVerificationMail = (email: string) => {
+    axios
+      .post("/api/auth/send-email-verification", {
+        email,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+        }
+      })
+      .catch((res) => {
+        console.log(res);
+      });
   };
 
   const formStateAction = (type: string) => {
@@ -71,7 +86,12 @@ const SignupForm = () => {
               })}
             />
 
-            <span className={formStyles.emailVerification}>이메일 인증</span>
+            <span
+              className={formStyles.emailVerification}
+              onClick={() => sendVerificationMail(formData.email)}
+            >
+              이메일 인증
+            </span>
 
             {errors.email && formData.email && (
               <div className={formStyles.fieldErrorMessage}>
