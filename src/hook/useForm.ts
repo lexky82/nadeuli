@@ -21,7 +21,7 @@ export const useForm = <T extends ZodSchema<any>>(initialValues: z.infer<T>, val
 
       setErrors(zodError);
     } else {
-      setErrors((prevErrors) => ({ ...prevErrors, [id]: undefined }));
+      setErrors({});
     }
   };
 
