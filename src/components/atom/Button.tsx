@@ -6,11 +6,18 @@ interface ButtonProps {
   className?: string;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   style?: React.CSSProperties;
+  disabled?: boolean;
 }
 
-export const Button = ({ onClick, children, className, type, style }: ButtonProps) => {
+export const Button = ({ onClick, children, className, type, style, disabled }: ButtonProps) => {
   return (
-    <button style={style} className={`${styles.button} ${className}`} onClick={onClick} type={type}>
+    <button
+      style={style}
+      className={`${styles.button} ${className}`}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
