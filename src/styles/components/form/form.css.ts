@@ -24,6 +24,10 @@ export const emailVerification = style({
   color: "blue",
   cursor: "pointer",
   fontSize: 14,
+
+  ":hover": {
+    textDecorationLine: "underline",
+  },
 });
 
 export const successVerification = style({
@@ -75,4 +79,10 @@ export const submitButton = style({
   fontSize: 16,
   height: 40,
   marginBottom: 5,
+});
+
+export const errorLetter = style({
+  color: "red",
+  fontSize: 14,
+  fontWeight: "bold",
 });
