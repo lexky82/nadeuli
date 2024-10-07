@@ -13,35 +13,77 @@ import { useForm } from "@/hook/useForm";
 import { signupSchema } from "@/utils/validate";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import * as Vars from "@/styles/components/atom/input.css";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useToastStore } from "@/stores/useToastStore";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
   const { formData, errors, handleChange } = useForm(
     {
       email: "",
-      phone: "",
       nickName: "",
       password: "",
       confirmPassword: "",
     },
     signupSchema
   );
+  const [isEmailCheck, setIsEmailCheck] = useState<"success" | "pending" | null>(null);
+
+  const router = useRouter();
+  const toast = useToastStore((state) => state.showToast);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    axios
+      .post("/api/auth/register", formData)
+      .then((res) => {
+        if (res.status === 201) {
+          toast({ title: "회원가입", contents: res.data.message }, "success");
+          return router.push("/login");
+        }
+      })
+      .catch((error: AxiosError) => {
+        if (error.status === 400) {
+          return toast({ title: "회원가입", contents: "이메일 인증을 완료해야 합니다." }, "error");
+        }
+      });
   };
 
-  const sendVerificationMail = (email: string) => {
+  const sendVerificationMail = (e: React.MouseEvent<HTMLButtonElement>, email: string) => {
+    e.preventDefault();
+
+    if (errors.email) {
+      return toast(
+        {
+          title: "이메일 인증",
+          contents: "올바른 이메일을 입력해주세요.",
+        },
+        "error"
+      );
+    }
+
     axios
       .post("/api/auth/send-email-verification", {
         email,
       })
       .then((res) => {
         if (res.status === 200) {
+          toast(
+            {
+              title: "이메일 인증",
+              contents: `${email}로 인증 메일을 발송하였습니다.`,
+            },
+            "info"
+          );
+          setIsEmailCheck("pending");
         }
       })
-      .catch((res) => {
-        console.log(res);
+      .catch((error: AxiosError) => {
+        if (error.status === 409) {
+          return toast({ title: "이메일 인증", contents: "이미 존재하는 이메일입니다." }, "error");
+        }
       });
   };
 
@@ -55,7 +97,15 @@ const SignupForm = () => {
     return actions[type as keyof typeof actions] || actions["default"];
   };
 
-  const emailBlurHandler = () => {};
+  const emailBlurHandler = (email: string) => {
+    if (isEmailCheck !== "pending") {
+      return;
+    }
+
+    axios.get("/api/auth/is-validEmail", { params: { email } }).then((res) => {
+      res.status === 200 && setIsEmailCheck("success");
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit} className={styles.signupFormContainer}>
@@ -69,9 +119,12 @@ const SignupForm = () => {
       <Separator className={formStyles.orSeparator}>or</Separator>
 
       <div className={styles.signupInputWrapper}>
-        <div className={formStyles.formFieldContainer}>
+        <div
+          className={formStyles.formFieldContainer}
+          onBlur={() => emailBlurHandler(formData.email)}
+        >
           <label htmlFor="email">이메일</label>
-          <div className={formStyles.formInputWrapper} onBlur={emailBlurHandler}>
+          <div className={formStyles.formInputWrapper}>
             <Input
               id="email"
               type="text"
@@ -84,14 +137,19 @@ const SignupForm = () => {
                   formData.email ? (errors.email ? "warning" : "success") : "defalut"
                 ),
               })}
+              disabled={isEmailCheck === "success"}
             />
 
-            <span
-              className={formStyles.emailVerification}
-              onClick={() => sendVerificationMail(formData.email)}
-            >
-              이메일 인증
-            </span>
+            {isEmailCheck !== "success" ? (
+              <button
+                className={formStyles.emailVerification}
+                onClick={(e) => sendVerificationMail(e, formData.email)}
+              >
+                이메일 인증
+              </button>
+            ) : (
+              <span className={formStyles.successVerification}>이메일 인증이 완료되었습니다.</span>
+            )}
 
             {errors.email && formData.email && (
               <div className={formStyles.fieldErrorMessage}>
