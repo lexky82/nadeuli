@@ -20,4 +20,10 @@ export const input = style({
   ":focus": {
     backgroundColor: "#ffffff",
   },
+
+  ":disabled": {
+    backgroundColor: "#cccccc",
+    cursor: "not-allowed",
+    opacity: 0.7,
+  },
 });
