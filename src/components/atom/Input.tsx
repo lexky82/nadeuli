@@ -9,6 +9,7 @@ interface InputProps {
   className?: string;
   required?: boolean;
   style?: CSSProperties;
+  disabled?: boolean;
 }
 
 export const Input = ({
@@ -19,6 +20,7 @@ export const Input = ({
   className,
   required = false,
   style,
+  disabled,
 }: InputProps) => {
   return (
     <input
@@ -29,6 +31,7 @@ export const Input = ({
       className={`${styles.input} ${className}`}
       required={required}
       style={style}
+      disabled={disabled}
     />
   );
 };
