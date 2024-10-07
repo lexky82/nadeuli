@@ -35,6 +35,9 @@ const SignupForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isEmailCheck !== "success" || Object.keys(errors).length !== 0) {
+      return;
+    }
 
     axios
       .post("/api/auth/register", formData)
@@ -53,6 +56,9 @@ const SignupForm = () => {
 
   const sendVerificationMail = (e: React.MouseEvent<HTMLButtonElement>, email: string) => {
     e.preventDefault();
+    if (!email) {
+      return;
+    }
 
     if (errors.email) {
       return toast(
@@ -233,7 +239,11 @@ const SignupForm = () => {
         </div>
       </div>
 
-      <Button type="submit" className={formStyles.submitButton}>
+      <Button
+        type="submit"
+        className={formStyles.submitButton}
+        disabled={isEmailCheck !== "success" || Object.keys(errors).length !== 0}
+      >
         회원가입
       </Button>
 
