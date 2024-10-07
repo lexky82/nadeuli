@@ -16,11 +16,21 @@ export const formInputWrapper = style({
 });
 
 export const emailVerification = style({
+  border: "none",
+  background: "none",
   position: "absolute",
   right: 15,
   top: "calc(25% + 5px)",
   color: "blue",
   cursor: "pointer",
+  fontSize: 14,
+});
+
+export const successVerification = style({
+  position: "absolute",
+  right: 15,
+  top: "calc(25% + 5px)",
+  color: "green",
   fontSize: 14,
 });
 
