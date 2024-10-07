@@ -16,6 +16,7 @@ export const toastContainer = style({
 });
 
 export const toastWrapper = style({
+  maxWidth: 300,
   position: "relative",
   display: "flex",
   alignItems: "center",
