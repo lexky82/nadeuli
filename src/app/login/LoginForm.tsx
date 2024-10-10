@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,47 +9,72 @@ import * as styles from "./style.css";
 import { Input } from "@/components/atom/Input";
 import { Button } from "@/components/atom/Button";
 import { Separator } from "@/components/atom/Separator";
+import { useState } from "react";
+import { signInWithCredentials } from "../serverActions/auth";
 
 const LoginForm = () => {
+  const [signInError, setSignInError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const result = await signInWithCredentials(formData);
+
+    if (result?.errorMessage) {
+      setSignInError(result.errorMessage);
+    } else {
+      setSignInError(null);
+    }
+  };
+
   return (
     <div className={styles.loginFormWrapper}>
-      <div className={styles.loginInputWrapper}>
-        <div className={formStyles.formFieldContainer}>
-          <label>이메일</label>
-          <Input
-            id="email"
-            type="text"
-            placeholder="이메일을 입력해주세요."
-            className={formStyles.formInput}
-          />
-        </div>
-
-        <div className={formStyles.formFieldContainer}>
-          <label>패스워드</label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="패스워드를 입력해주세요."
-            className={formStyles.formInput}
-          />
-        </div>
-
-        <div className={styles.loginOptionsWrapper}>
-          <div className={styles.autoLoginCheckbox}>
-            <input type="checkbox" name="autoLogin" id="autoLogin" />
-            <span>자동 로그인</span>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <div className={styles.loginInputWrapper}>
+          <div className={formStyles.formFieldContainer}>
+            <label>이메일</label>
+            <Input
+              name="email"
+              id="email"
+              type="text"
+              placeholder="이메일을 입력해주세요."
+              className={formStyles.formInput}
+              required
+            />
           </div>
 
-          <div className={styles.findLinkBox}>
-            <Link href="/findid">이메일 찾기</Link>
-            <Link href="/findpw">패스워드 찾기</Link>
+          <div className={formStyles.formFieldContainer}>
+            <label>패스워드</label>
+            <Input
+              name="password"
+              id="password"
+              type="password"
+              placeholder="패스워드를 입력해주세요."
+              className={formStyles.formInput}
+              required
+            />
+          </div>
+
+          {signInError && <span className={formStyles.errorLetter}>{signInError}</span>}
+
+          <div className={styles.loginOptionsWrapper}>
+            <div className={styles.autoLoginCheckbox}>
+              <input type="checkbox" name="autoLogin" id="autoLogin" />
+              <span>자동 로그인</span>
+            </div>
+
+            <div className={styles.findLinkBox}>
+              <Link href="/findid">이메일 찾기</Link>
+              <Link href="/findpw">패스워드 찾기</Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <Button type="submit" className={formStyles.submitButton}>
-        로그인
-      </Button>
+        <Button type="submit" className={formStyles.submitButton}>
+          로그인
+        </Button>
+      </form>
 
       <div className={formStyles.recomendSignup}>
         <span>계정이 없다면?</span>
