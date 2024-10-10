@@ -31,6 +31,10 @@ export const loginFormWrapper = style({
   alignItems: "center",
 });
 
+export const loginForm = style({
+  width: "100%",
+});
+
 export const loginOptionsWrapper = style({
   display: "flex",
   fontSize: 14,
@@ -43,6 +47,7 @@ export const loginOptionsWrapper = style({
 export const findLinkBox = style({
   display: "flex",
   gap: 5,
+  textDecorationLine: "underline",
 });
 
 export const autoLoginCheckbox = style({

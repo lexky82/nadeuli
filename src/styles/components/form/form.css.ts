@@ -82,7 +82,7 @@ export const submitButton = style({
 });
 
 export const errorLetter = style({
-  color: "red",
+  color: "#EE003B",
   fontSize: 14,
   fontWeight: "bold",
 });
