@@ -10,6 +10,7 @@ interface InputProps {
   required?: boolean;
   style?: CSSProperties;
   disabled?: boolean;
+  name?: string;
 }
 
 export const Input = ({
@@ -20,10 +21,12 @@ export const Input = ({
   className,
   required = false,
   style,
+  name,
   disabled,
 }: InputProps) => {
   return (
     <input
+      name={name}
       id={id}
       type={type}
       placeholder={placeholder}
