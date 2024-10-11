@@ -6,7 +6,6 @@ import { JWT } from "next-auth/jwt";
 interface User extends NextAuthUser {
   nickname?: string;
   accessToken?: string;
-  refreshToken?: string;
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -25,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           });
 
           if (res.status === 200 && res.data) {
-            return res.data; // 사용자 정보 반환
+            return res.data;
           }
 
           return null;
@@ -49,7 +48,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }: { token: JWT; user: User }) {
       if (user) {
         token.accessToken = user.accessToken;
-        token.refreshToken = user.refreshToken;
         token.accessTokenExpires = Date.now() + 3600 * 1000;
       }
 
@@ -62,7 +60,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
       session.accessTokenExpires = token.accessTokenExpires;
       return session;
     },
@@ -71,16 +68,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 const refreshAccessToken = async (token: JWT) => {
   try {
-    const res = await axios.post(
-      "http://localhost:4000/api/auth/refresh",
-      {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.refreshToken}`,
-        },
-      }
-    );
+    const res = await axios.post("http://localhost:4000/api/auth/refresh");
 
     const refreshedTokens = res.data;
 
@@ -92,7 +80,6 @@ const refreshAccessToken = async (token: JWT) => {
       ...token,
       accessToken: refreshedTokens.accessToken,
       accessTokenExpires: Date.now() + 3600 * 1000,
-      refreshToken: refreshedTokens.refreshToken ?? token.refreshToken,
     };
   } catch (error) {
     console.error("Error refreshing access token:", error);
