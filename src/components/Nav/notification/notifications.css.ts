@@ -49,10 +49,11 @@ export const markAsAllButtonWrapper = style({
 
 export const notiListWrapper = style({
   display: "flex",
-  justifyContent: "center",
   flexDirection: "column",
   gap: 8,
   padding: "0 10px",
+  overflowY: "scroll",
+  height: 400,
 });
 
 export const notification = style({
