@@ -58,7 +58,7 @@ export const profileNav = style({
   alignItems: "center",
   cursor: "pointer",
   fontWeight: 300,
-  transition: "all 0.2s",
+  transition: "all 0.15s",
 
   ":hover": {
     backgroundColor: themeVars.colors.secondary,
