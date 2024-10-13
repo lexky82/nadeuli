@@ -1,12 +1,13 @@
 "use client";
 
-import * as styles from "../styles/components/Nav.css";
+import * as styles from "../../styles/components/Nav.css";
 import Link from "next/link";
 import Image from "next/image";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import Logo from "./atom/Logo";
+import Logo from "../atom/Logo";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { UserAvatar } from "./userAvatar/UserAvatar";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -102,14 +103,8 @@ export default function Navbar() {
             height={40}
             alt="notifications"
           />
-          <Image
-            onClick={profileClickHandler}
-            className={styles.rectIcon}
-            src="/Person.svg"
-            width={40}
-            height={40}
-            alt="profile"
-          />
+
+          <UserAvatar />
         </div>
       </nav>
     );
