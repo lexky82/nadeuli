@@ -8,6 +8,7 @@ import Logo from "../atom/Logo";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { UserAvatar } from "./userAvatar/UserAvatar";
+import { Notifications } from "./notification/Notifications";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -96,13 +97,7 @@ export default function Navbar() {
             alt="write"
           />
           <span style={{ marginRight: 8, marginLeft: 8 }}>|</span>
-          <Image
-            className={styles.rectIcon}
-            src="/Notifications.svg"
-            width={40}
-            height={40}
-            alt="notifications"
-          />
+          <Notifications />
 
           <UserAvatar />
         </div>
