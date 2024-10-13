@@ -2,7 +2,7 @@ import "@/styles/normalize.css";
 import "@/styles/globalTheme.css";
 import "swiper/css";
 
-import Nav from "@/components/Nav";
+import Nav from "@/components/Nav/";
 import { themeClass } from "@/styles/globalTheme.css";
 import Script from "next/script";
 import Toast from "@/components/Toast";
