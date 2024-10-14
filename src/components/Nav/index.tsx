@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { UserAvatar } from "./userAvatar/UserAvatar";
 import { Notifications } from "./notification/Notifications";
+import { useSession } from "next-auth/react";
 
 const routes = [
   { title: "홈", path: "/" },
@@ -20,10 +21,10 @@ const routes = [
 const noRenderPath = ["/login", "/signup", "/findid", "/findpw"];
 
 export default function Navbar() {
+  const [scrollY, setScrollY] = useState(0);
   const currentPath = usePathname();
   const router = useRouter();
-
-  const [scrollY, setScrollY] = useState(0);
+  const { data: session } = useSession();
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -57,7 +58,7 @@ export default function Navbar() {
           {routes.map((route, key) => {
             return (
               <Link key={key} href={route.path}>
-                <span
+                <li
                   className={
                     route.path === `/${currentPath.split("/")[1]}`
                       ? styles.primaryRoute
@@ -65,7 +66,7 @@ export default function Navbar() {
                   }
                 >
                   {route.title}
-                </span>
+                </li>
               </Link>
             );
           })}
@@ -88,19 +89,31 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className={styles.iconWrapper}>
-          <Image
-            className={styles.rectIcon}
-            src="/Ink_pen.svg"
-            width={48}
-            height={48}
-            alt="write"
-          />
-          <span style={{ marginRight: 8, marginLeft: 8 }}>|</span>
-          <Notifications />
+        {session ? (
+          <div className={styles.iconWrapper}>
+            <Image
+              className={styles.rectIcon}
+              src="/Ink_pen.svg"
+              width={48}
+              height={48}
+              alt="write"
+            />
+            <span style={{ marginRight: 8, marginLeft: 8 }}>|</span>
+            <Notifications />
 
-          <UserAvatar />
-        </div>
+            <UserAvatar />
+          </div>
+        ) : (
+          <ul className={styles.nonSessionNavWrapper}>
+            <Link href="/login">
+              <li className={styles.nonSessionRoute}>로그인</li>
+            </Link>
+
+            <Link href="/signup">
+              <li className={styles.nonSessionRoute}>회원가입</li>
+            </Link>
+          </ul>
+        )}
       </nav>
     );
   } else {
