@@ -9,7 +9,7 @@ interface Notifications {
 }
 
 export const Notifications = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const handleNotiClick = () => {
     setIsVisible(!isVisible);
