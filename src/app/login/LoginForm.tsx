@@ -25,6 +25,7 @@ const LoginForm = () => {
       setSignInError(result.errorMessage);
     } else {
       setSignInError(null);
+      return (window.location.href = "/");
     }
   };
 
