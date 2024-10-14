@@ -8,7 +8,7 @@ export const button = style({
   border: "none",
   backgroundColor: themeVars.colors.primary,
   fontSize: 14,
-  fontWeight: 300,
+  fontWeight: 500,
   transition: "background-color 0.15s ease",
   width: "100%",
 
