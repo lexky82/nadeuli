@@ -6,8 +6,12 @@ import Nav from "@/components/Nav/";
 import { themeClass } from "@/styles/globalTheme.css";
 import Script from "next/script";
 import Toast from "@/components/Toast";
+import { SessionProvider } from "next-auth/react";
+import { getSession } from "./serverActions/auth";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getSession();
+
   return (
     <html lang="ko-kr" className={themeClass}>
       <head>
@@ -21,11 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body suppressHydrationWarning={true}>
-        <header>
-          <Nav />
-        </header>
+        <SessionProvider session={session}>
+          <header>
+            <Nav />
+          </header>
+          <main>{children}</main>
+        </SessionProvider>
 
-        <main>{children}</main>
         <Toast />
       </body>
     </html>
