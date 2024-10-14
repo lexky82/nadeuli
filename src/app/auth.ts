@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import axios, { Axios, AxiosError } from "axios";
 import { JWT } from "next-auth/jwt";
 
-interface User extends NextAuthUser {
+export interface User extends NextAuthUser {
   nickname?: string;
   accessToken?: string;
 }
@@ -18,7 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials) {
         try {
-          const res = await axios.post("http://localhost:4000/api/auth/login", {
+          const res = await axios.post("http://localhost:4000/api/authentication/login", {
             email: credentials?.email,
             password: credentials?.password,
           });
@@ -68,7 +68,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 const refreshAccessToken = async (token: JWT) => {
   try {
-    const res = await axios.post("http://localhost:4000/api/auth/refresh");
+    const res = await axios.post("http://localhost:4000/api/authentication/refresh");
 
     const refreshedTokens = res.data;
 
