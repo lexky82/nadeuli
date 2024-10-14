@@ -18,7 +18,9 @@ export const UserAvatar = () => {
   };
 
   const handleLogoutClick = () => {
-    signOutWithForm();
+    signOutWithForm().then(() => {
+      window.location.reload();
+    });
   };
 
   return (
