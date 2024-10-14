@@ -26,6 +26,10 @@ globalStyle("a", {
   textDecoration: "none",
 });
 
+globalStyle("li", {
+  listStyle: "none",
+});
+
 globalStyle("input", {
   fontFamily: "Noto Sans KR",
   fontSize: 16,
