@@ -78,3 +78,17 @@ export const searchIcon = style({
   top: "0.4rem",
   marginLeft: 25,
 });
+
+export const nonSessionNavWrapper = style({
+  display: "flex",
+  gap: 20,
+  cursor: "pointer",
+});
+
+export const nonSessionRoute = style({
+  color: "black",
+
+  ":hover": {
+    color: themeVars.colors.primary,
+  },
+});
