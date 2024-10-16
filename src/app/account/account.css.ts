@@ -1,5 +1,5 @@
 import { themeVars } from "@/styles/globalTheme.css";
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 
 export const accountNavContainer = style({
   position: "sticky",
@@ -27,6 +27,8 @@ export const accountNavWrapper = style({
   gap: 3,
 });
 
+export const currentRoute = createVar();
+
 export const accountNavRoute = style({
   display: "flex",
   alignItems: "center",
@@ -37,6 +39,7 @@ export const accountNavRoute = style({
   cursor: "pointer",
   borderRadius: 8,
   transition: "all 0.1s",
+  background: currentRoute,
 
   ":hover": {
     color: themeVars.colors.primary,
