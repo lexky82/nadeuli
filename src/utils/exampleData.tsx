@@ -1,4 +1,5 @@
 import Image from "next/image";
+import * as styles from "./style.css";
 
 export const mapContentsType = [
   "고분",
@@ -92,7 +93,7 @@ export const exmapleFetchData = {
 export const TabData = [
   {
     key: 0,
-    label: `기행문(${exmapleFetchData.travelessay.length})`,
+    label: <p className={styles.label}>기행문({exmapleFetchData.travelessay.length})</p>,
     children: (
       <div style={{ padding: 10 }}>
         <div style={{ display: "flex", alignItems: "center", marginBottom: 5 }}>
@@ -135,7 +136,7 @@ export const TabData = [
   },
   {
     key: 1,
-    label: "간단 후기",
+    label: <p className={styles.label}>간단 후기</p>,
     children: <div>간단후기 예시</div>,
   },
 ];
