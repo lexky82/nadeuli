@@ -18,10 +18,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials) {
         try {
-          const res = await axios.post("http://localhost:4000/api/authentication/login", {
-            email: credentials?.email,
-            password: credentials?.password,
-          });
+          const res = await axios.post(
+            "http://localhost:4000/api/authentication/login",
+            {
+              email: credentials?.email,
+              password: credentials?.password,
+            },
+            { withCredentials: true }
+          );
 
           if (res.status === 200 && res.data) {
             return res.data;
@@ -68,7 +72,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 const refreshAccessToken = async (token: JWT) => {
   try {
-    const res = await axios.post("http://localhost:4000/api/authentication/refresh");
+    const res = await axios.post(
+      "http://localhost:4000/api/authentication/refresh",
+      {},
+      { withCredentials: true }
+    );
 
     const refreshedTokens = res.data;
 
@@ -84,9 +92,6 @@ const refreshAccessToken = async (token: JWT) => {
   } catch (error) {
     console.error("Error refreshing access token:", error);
 
-    return {
-      ...token,
-      error: "RefreshAccessTokenError",
-    };
+    return null;
   }
 };
