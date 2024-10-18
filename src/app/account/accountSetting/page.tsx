@@ -1,10 +1,19 @@
+"use client";
+
 import { Button } from "@/components/atom/Button";
 import * as styles from "./style.css";
 import * as accountStyle from "../account.css";
 import Image from "next/image";
 import AccountNav from "../AccountNav";
+import axios from "axios";
 
 export const AccountSetting = () => {
+  const du = () => {
+    axios.post("/api/authentication/checkCookie", {}, { withCredentials: true }).then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <div className={accountStyle.accountPageContainer}>
       <AccountNav />
@@ -28,7 +37,9 @@ export const AccountSetting = () => {
               </div>
             </div>
 
-            <Button className={styles.editUserInfoButton}>수정</Button>
+            <Button onClick={du} className={styles.editUserInfoButton}>
+              수정
+            </Button>
           </div>
         </div>
 
