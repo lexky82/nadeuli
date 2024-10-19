@@ -24,10 +24,8 @@ export const paginationChip = style({
   padding: "4px 8px",
   borderRadius: 4,
   backgroundColor: "none",
+
   ":hover": {
-    backgroundColor: themeVars.colors.gray,
-  },
-  ":focus": {
     color: "white",
     backgroundColor: themeVars.colors.primary,
   },
@@ -52,4 +50,5 @@ export const moveWrapper = style({
 export const paginationContainer = style({
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
 });
