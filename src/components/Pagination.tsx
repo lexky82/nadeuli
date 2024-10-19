@@ -10,7 +10,7 @@ const Pagination = ({ className }: PaginationProps) => {
   return (
     <ul className={`${styles.paginationContainer} ${className}`}>
       <div className={styles.paginationWrapper}>
-        <Image src="/chevron-left.svg" alt="moveToPrev" />
+        <Image src="/chevron-left.svg" alt="moveToPrev" width={24} height={24} />
         <li className={styles.paginationChip}>1</li>
         <li className={styles.paginationChip}>2</li>
         <li className={styles.paginationChip}>3</li>
@@ -18,12 +18,7 @@ const Pagination = ({ className }: PaginationProps) => {
         <li className={styles.paginationChip}>5</li>
         <li className={styles.paginationChip}>...</li>
         <li className={styles.paginationChip}>32</li>
-        <Image src="/chevron-right.svg" alt="moveToNext" />
-      </div>
-
-      <div className={styles.moveWrapper}>
-        <input className={styles.moveToPageNumber} type="number" min={1} />
-        <button className={styles.moveToPageButton}>이동</button>
+        <Image src="/chevron-right.svg" alt="moveToNext" width={24} height={24} />
       </div>
     </ul>
   );
