@@ -4,10 +4,6 @@ import { createVar, style } from "@vanilla-extract/css";
 export const label = style({
   display: "flex",
   justifyContent: "center",
-  padding: "15px 30px",
+  padding: "8px 15px",
   transition: "all 0.2s",
-
-  ":hover": {
-    background: themeVars.colors.secondary,
-  },
 });
