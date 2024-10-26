@@ -26,9 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body suppressHydrationWarning={true}>
         <SessionProvider session={session}>
-          <header>
-            <Nav />
-          </header>
+          <Nav />
           <main>{children}</main>
         </SessionProvider>
 
