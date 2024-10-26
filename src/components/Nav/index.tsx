@@ -44,7 +44,7 @@ export default function Navbar() {
 
   if (!noRenderPath.includes(currentPath)) {
     return (
-      <nav
+      <header
         className={styles.navContainer}
         style={assignInlineVars({
           [styles.navBackColor]: scrollY !== 0 ? "#fff" : "inherit",
@@ -54,23 +54,25 @@ export default function Navbar() {
       >
         <Logo />
 
-        <ul className={styles.routesWrapper}>
-          {routes.map((route, key) => {
-            return (
-              <Link key={key} href={route.path}>
-                <li
-                  className={
-                    route.path === `/${currentPath.split("/")[1]}`
-                      ? styles.primaryRoute
-                      : styles.route
-                  }
-                >
-                  {route.title}
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
+        <nav>
+          <ul className={styles.routesWrapper}>
+            {routes.map((route, key) => {
+              return (
+                <Link key={key} href={route.path}>
+                  <li
+                    className={
+                      route.path === `/${currentPath.split("/")[1]}`
+                        ? styles.primaryRoute
+                        : styles.route
+                    }
+                  >
+                    {route.title}
+                  </li>
+                </Link>
+              );
+            })}
+          </ul>
+        </nav>
 
         <div className={styles.searchContainer}>
           <div className={styles.searchBarWrapper}>
@@ -114,7 +116,7 @@ export default function Navbar() {
             </Link>
           </ul>
         )}
-      </nav>
+      </header>
     );
   } else {
     return <div></div>;
