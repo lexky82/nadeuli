@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 const SignupPage = async () => {
   const session = await getSession();
 
-  if (session) {
+  if (session?.user) {
     redirect("/");
   }
 
