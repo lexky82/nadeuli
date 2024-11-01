@@ -66,8 +66,7 @@ const LoginForm = () => {
             </div>
 
             <div className={styles.findLinkBox}>
-              <Link href="/findid">이메일 찾기</Link>
-              <Link href="/findpw">패스워드 찾기</Link>
+              <Link href="/findPw">패스워드 찾기</Link>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ const routes = [
   { title: "기행문", path: "/travelogue" },
 ];
 
-const noRenderPath = ["/login", "/signup", "/findid", "/findpw"];
+const noRenderPath = ["/login", "/signup", "/findid", "/findPw"];
 
 export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
@@ -91,7 +91,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {session ? (
+        {false ? (
           <div className={styles.iconWrapper}>
             <Image
               className={styles.rectIcon}
