@@ -16,3 +16,7 @@ export const signupSchema = z
     message: "패스워드와 일치하지 않습니다.",
     path: ["confirmPassword"],
   });
+
+export const findPwSchema = z.object({
+  email: z.string().email("이메일 형식이 아닙니다."),
+});
