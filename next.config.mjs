@@ -21,6 +21,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "flexible.img.hani.co.kr",
       },
+      {
+        protocol: "https",
+        hostname: "naver.github.io",
+      },
     ],
   },
 };
