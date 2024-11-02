@@ -92,7 +92,7 @@ const Card = ({
         </div>
       </div>
 
-      <div className={styles.tranvelCardInfoWrapper}>
+      <div className={styles.travelCardInfoWrapper}>
         <h3>{title}</h3>
         <p>{location}</p>
         <p>{createAt}</p>
