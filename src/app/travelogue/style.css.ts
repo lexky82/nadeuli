@@ -24,14 +24,17 @@ export const darkenOverlay = style({
   },
 });
 
-export const tranvelCardInfoWrapper = style({
+export const travelCardInfoWrapper = style({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  width: 320,
   position: "absolute",
   left: 20,
   bottom: 20,
   color: "white",
 });
 
-export const writer = style({
+export const writerContainer = style({
   display: "flex",
   alignItems: "center",
   gap: 5,
@@ -39,4 +42,8 @@ export const writer = style({
   right: 20,
   color: "white",
   bottom: 20,
+});
+
+export const writer = style({
+  marginBottom: 2,
 });

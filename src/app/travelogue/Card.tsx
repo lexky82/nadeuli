@@ -98,7 +98,7 @@ const Card = ({
         <p>{createAt}</p>
       </div>
 
-      <div className={styles.writer}>
+      <div className={styles.writerContainer}>
         <div
           style={{
             width: 24,
@@ -107,7 +107,7 @@ const Card = ({
             borderRadius: "50%",
           }}
         />
-        <span>{writer}</span>
+        <span className={styles.writer}>{writer}</span>
       </div>
     </div>
   );
