@@ -68,7 +68,7 @@ const RuinsInformation = ({ params }: Params) => {
           </div>
         </GlassBox>
       </div>
-      <div style={{ padding: "0 160px" }}>
+      <div style={{ padding: "0 200px" }}>
         <h4
           style={{
             display: "flex",
