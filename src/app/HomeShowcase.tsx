@@ -11,9 +11,10 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 const exampleRecomends = [
   {
     title: (
-      <p>
-        <p>백제의 향기를 담은</p> <span>부여 뚜벅이 여행 코스</span>
-      </p>
+      <div>
+        <p>백제의 향기를 담은</p>
+        <span>부여 뚜벅이 여행 코스</span>
+      </div>
     ),
     image: "/backje.png",
     alt: "백제의 이미지",
@@ -22,9 +23,10 @@ const exampleRecomends = [
   },
   {
     title: (
-      <p>
-        <p>안동으로 떠나는</p> <span>소박한 여행</span>
-      </p>
+      <div>
+        <p>안동으로 떠나는</p>
+        <span>소박한 여행</span>
+      </div>
     ),
     image: "/signup_background_image.jpg",
     alt: "백제의 이미지",
@@ -33,9 +35,10 @@ const exampleRecomends = [
   },
   {
     title: (
-      <p>
-        <p>과거의 숨결이 담긴</p> <span>박물관 여행</span>
-      </p>
+      <div>
+        <p>과거의 숨결이 담긴</p>
+        <span>박물관 여행</span>
+      </div>
     ),
     image: "/login_background_image.jpg",
     alt: "백제의 이미지",
@@ -45,9 +48,10 @@ const exampleRecomends = [
 
   {
     title: (
-      <p>
-        <p>신라인의 간절함</p> <span>삼년산성</span>
-      </p>
+      <div>
+        <p>신라인의 간절함</p>
+        <span>삼년산성</span>
+      </div>
     ),
     image: "/20221209501200.jpg",
     alt: "백제의 이미지",
