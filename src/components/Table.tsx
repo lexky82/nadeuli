@@ -29,7 +29,7 @@ export const Table = ({ columns, dataSource }: TableProps) => {
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className={styles.tableBodyWrapper}>
         {dataSource.map((data, i) => (
           <tr key={i}>
             {columns.map((column, key) => (
