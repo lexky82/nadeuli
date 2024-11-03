@@ -3,7 +3,7 @@ import { createVar, style } from "@vanilla-extract/css";
 
 export const accountNavContainer = style({
   position: "sticky",
-  top: 60,
+  top: "calc(60px + 71px)",
   display: "flex",
   flexDirection: "column",
   padding: 20,
