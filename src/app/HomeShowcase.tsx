@@ -10,18 +10,49 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 const exampleRecomends = [
   {
-    title: "백제의 향기를 담은\n 부여 뚜벅이 여행 코스",
+    title: (
+      <p>
+        <p>백제의 향기를 담은</p> <span>부여 뚜벅이 여행 코스</span>
+      </p>
+    ),
     image: "/backje.png",
     alt: "백제의 이미지",
     more: "https://naver.com",
     backColor: "#EDFFFF",
   },
   {
-    title: "백제의 향기를 ㄹㅇㄹㅇㄹ\n 부여 뚜벅이 여행 코스",
-    image: "/backje.png",
+    title: (
+      <p>
+        <p>안동으로 떠나는</p> <span>소박한 여행</span>
+      </p>
+    ),
+    image: "/signup_background_image.jpg",
     alt: "백제의 이미지",
     more: "https://naver.com",
-    backColor: "#ffeaaa",
+    backColor: "#e4d96f",
+  },
+  {
+    title: (
+      <p>
+        <p>과거의 숨결이 담긴</p> <span>박물관 여행</span>
+      </p>
+    ),
+    image: "/login_background_image.jpg",
+    alt: "백제의 이미지",
+    more: "https://naver.com",
+    backColor: "#575757",
+  },
+
+  {
+    title: (
+      <p>
+        <p>신라인의 간절함</p> <span>삼년산성</span>
+      </p>
+    ),
+    image: "/20221209501200.jpg",
+    alt: "백제의 이미지",
+    more: "https://naver.com",
+    backColor: "#a0a0a0",
   },
 ];
 
@@ -38,6 +69,7 @@ export default function HomeShowcase() {
       })}
     >
       <Swiper
+        speed={1000}
         spaceBetween={20}
         slidesPerView={1}
         modules={[Controller, Autoplay]}
@@ -45,6 +77,7 @@ export default function HomeShowcase() {
         onSlideChange={(e) => setCurrentIndex(e.activeIndex)}
         controller={{ control: secondSwiper }}
         autoplay
+        style={{ width: 800 }}
       >
         {exampleRecomends.map((recomend, key) => (
           <SwiperSlide key={key}>
@@ -73,11 +106,16 @@ export default function HomeShowcase() {
         controller={{ control: firstSwiper }}
         spaceBetween={15}
         slidesPerView={1}
-        style={{ padding: 40 }}
+        style={{ padding: 40, width: 800, height: 600 }}
       >
         {exampleRecomends.map((recomend, key) => (
           <SwiperSlide key={key}>
-            <Image src={recomend.image} alt={recomend.alt} width={700} height={500} />
+            <Image
+              src={recomend.image}
+              alt={recomend.alt}
+              fill
+              style={{ objectFit: "fill", borderRadius: 20 }}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
