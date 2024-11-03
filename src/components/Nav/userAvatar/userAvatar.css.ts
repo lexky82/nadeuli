@@ -6,6 +6,9 @@ export const userAvatarContainer = style({
 });
 
 export const profileContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   position: "absolute",
   right: "-70%",
   marginTop: 8,
