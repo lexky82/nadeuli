@@ -91,7 +91,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {false ? (
+        {session?.user ? (
           <div className={styles.iconWrapper}>
             <Image
               className={styles.rectIcon}
