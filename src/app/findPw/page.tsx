@@ -7,11 +7,18 @@ import Logo from "@/components/atom/Logo";
 import FindPwForm from "./FindPwForm";
 import * as loginStyle from "../login/style.css";
 import Image from "next/image";
-import useStepStore from "@/stores/useStepStore";
+import usePwChangeStore from "@/stores/usePasswordChangeStore";
 import ChangePwForm from "./ChangePwForm";
+import { useEffect } from "react";
 
 const FindPw = () => {
-  const currentStep = useStepStore((state) => state.currentStep);
+  const { currentStep, clearStore } = usePwChangeStore();
+
+  useEffect(() => {
+    return () => {
+      clearStore();
+    };
+  }, []);
 
   return (
     <div className={`${style.fullScreenContainer}`}>
