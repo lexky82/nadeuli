@@ -8,9 +8,9 @@ import * as formStyles from "@/styles/components/form/form.css";
 import { findPwSchema } from "@/utils/validate";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import * as Vars from "@/styles/components/atom/input.css";
-import useStepStore from "@/stores/useStepStore";
+import usePwChangeStore from "@/stores/usePasswordChangeStore";
 import * as styles from "./style.css";
 
 const FindPwForm = () => {
@@ -21,7 +21,7 @@ const FindPwForm = () => {
     findPwSchema
   );
   const toast = useToastStore((state) => state.showToast);
-  const nextStep = useStepStore((state) => state.nextStep);
+  const { setVerifyEmail, nextStep } = usePwChangeStore();
 
   const [isEmailCheck, setIsEmailCheck] = useState<"success" | "pending" | null>(null);
   const emailBlurHandler = (email: string) => {
@@ -29,7 +29,7 @@ const FindPwForm = () => {
       return;
     }
 
-    axios.get("/api/auth/is-validEmail", { params: { email } }).then((res) => {
+    axios.get("/api/authentication/is-validEmail", { params: { email } }).then((res) => {
       res.status === 200 && setIsEmailCheck("success");
     });
   };
@@ -50,8 +50,18 @@ const FindPwForm = () => {
       return;
     }
 
+    if (errors.email) {
+      return toast(
+        {
+          title: "이메일 인증",
+          contents: "올바른 이메일을 입력해주세요.",
+        },
+        "error"
+      );
+    }
+
     axios
-      .post("/api/auth/send-email-verification", {
+      .post("/api/authentication/check-user", {
         email,
       })
       .then((res) => {
@@ -67,13 +77,19 @@ const FindPwForm = () => {
         }
       })
       .catch((error: AxiosError) => {
-        if (error.status === 409) {
-          return toast({ title: "이메일 인증", contents: "이미 존재하는 이메일입니다." }, "error");
+        if (error.status === 404) {
+          return toast({ title: "이메일 인증", contents: "존재하지 않는 이메일입니다." }, "error");
         }
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (isEmailCheck !== "success" || Object.keys(errors).length !== 0) {
+      return;
+    }
+
+    isEmailCheck === "success" && setVerifyEmail(formData.email);
     nextStep();
   };
 
