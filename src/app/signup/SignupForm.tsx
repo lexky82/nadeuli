@@ -40,7 +40,7 @@ const SignupForm = () => {
     }
 
     axios
-      .post("/api/auth/register", formData)
+      .post("/api/authentication/register", formData)
       .then((res) => {
         if (res.status === 201) {
           toast({ title: "회원가입", contents: res.data.message }, "success");
@@ -71,7 +71,7 @@ const SignupForm = () => {
     }
 
     axios
-      .post("/api/auth/send-email-verification", {
+      .post("/api/authentication/send-email-verification", {
         email,
       })
       .then((res) => {
@@ -108,7 +108,7 @@ const SignupForm = () => {
       return;
     }
 
-    axios.get("/api/auth/is-validEmail", { params: { email } }).then((res) => {
+    axios.get("/api/authentication/is-validEmail", { params: { email } }).then((res) => {
       res.status === 200 && setIsEmailCheck("success");
     });
   };
