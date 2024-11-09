@@ -4,16 +4,8 @@ import Logo from "@/components/atom/Logo";
 import * as styles from "./styles.css";
 import SignupForm from "./SignupForm";
 import { GlassBox } from "@/components/atom/GlassBox";
-import { getSession } from "../serverActions/auth";
-import { redirect } from "next/navigation";
 
-const SignupPage = async () => {
-  const session = await getSession();
-
-  if (session?.user) {
-    redirect("/");
-  }
-
+const SignupPage = () => {
   return (
     <div className={style.fullScreenContainer}>
       <Image
