@@ -4,7 +4,6 @@ import axios, { Axios, AxiosError } from "axios";
 import { JWT } from "next-auth/jwt";
 
 export interface User extends NextAuthUser {
-  nickname?: string;
   accessToken?: string;
 }
 
@@ -35,6 +34,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         } catch (error: any) {
           if (error.response && error.response.status === 400) {
             throw new Error(error.response.data.message);
+          }
+
+          if (error.response && error.response.status === 500) {
+            throw new Error("존재하지 않는 계정입니다.");
           }
 
           throw new Error(error.message || "서버와의 통신을 실패했습니다. 관리자에게 문의하세요.");

@@ -22,7 +22,7 @@ const SignupForm = () => {
   const { formData, errors, handleChange } = useForm(
     {
       email: "",
-      nickName: "",
+      name: "",
       password: "",
       confirmPassword: "",
     },
@@ -168,9 +168,9 @@ const SignupForm = () => {
         </div>
 
         <div className={formStyles.formFieldContainer}>
-          <label htmlFor="nickName">닉네임</label>
+          <label htmlFor="name">닉네임</label>
           <Input
-            id="nickName"
+            id="name"
             type="text"
             placeholder="닉네임을 입력해주세요."
             className={formStyles.formInput}
