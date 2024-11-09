@@ -6,13 +6,10 @@ import * as accountStyle from "../account.css";
 import Image from "next/image";
 import AccountNav from "../AccountNav";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export const AccountSetting = () => {
-  const du = () => {
-    axios.post("/api/authentication/checkCookie", {}, { withCredentials: true }).then((res) => {
-      console.log(res.data);
-    });
-  };
+  const { data: session } = useSession();
 
   return (
     <div className={accountStyle.accountPageContainer}>
@@ -27,19 +24,17 @@ export const AccountSetting = () => {
             <div className={styles.accountInfoWrapper}>
               <div className={styles.defaultProfileImage} />
 
-              <span className={styles.userNickname}>으워오</span>
+              <span className={styles.userNickname}>{session?.user?.name}</span>
 
               <div className={styles.userEmailWrapper}>
-                <span className={styles.userEmail}>lexky82@gmail.com</span>
+                <span className={styles.userEmail}>{session?.user?.email}</span>
 
                 <Image src="/validated.svg" alt="email validated" width={24} height={24} />
                 <span className={styles.emailValidated}>인증 완료!</span>
               </div>
             </div>
 
-            <Button onClick={du} className={styles.editUserInfoButton}>
-              수정
-            </Button>
+            <Button className={styles.editUserInfoButton}>수정</Button>
           </div>
         </div>
 

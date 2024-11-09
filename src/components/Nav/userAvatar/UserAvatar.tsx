@@ -5,10 +5,11 @@ import Image from "next/image";
 import * as styles from "@/styles/components/Nav.css";
 import * as avatarStyles from "./userAvatar.css";
 import { signOutWithForm } from "@/app/serverActions/auth";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export const UserAvatar = () => {
+  const { data: session } = useSession();
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const router = useRouter();
 
@@ -48,8 +49,8 @@ export const UserAvatar = () => {
             <div className={avatarStyles.defaultProfileImage} />
 
             <div>
-              <p>으워오</p>
-              <p className={avatarStyles.userEmail}>lexky82@gmail.com</p>
+              <p>{session?.user?.name}</p>
+              <p className={avatarStyles.userEmail}>{session?.user?.email}</p>
             </div>
           </div>
 
