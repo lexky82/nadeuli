@@ -7,7 +7,7 @@ import { themeClass } from "@/styles/globalTheme.css";
 import Script from "next/script";
 import Toast from "@/components/Toast";
 import { SessionProvider } from "next-auth/react";
-import { getSession } from "./serverActions/auth";
+import { getSession } from "../serverActions/auth";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();

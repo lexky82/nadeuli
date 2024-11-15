@@ -10,7 +10,7 @@ import { Input } from "@/components/atom/Input";
 import { Button } from "@/components/atom/Button";
 import { Separator } from "@/components/atom/Separator";
 import { useState } from "react";
-import { signInWithCredentials } from "../serverActions/auth";
+import { signInWithCredentials } from "../../serverActions/auth";
 
 const LoginForm = () => {
   const [signInError, setSignInError] = useState<string | null>(null);

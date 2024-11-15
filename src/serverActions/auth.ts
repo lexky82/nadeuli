@@ -1,5 +1,5 @@
 "use server";
-import { auth, signIn, signOut } from "@/app/auth";
+import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 
 export const signInWithCredentials = async (formData: FormData) => {

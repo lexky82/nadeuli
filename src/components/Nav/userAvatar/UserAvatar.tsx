@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import * as styles from "@/styles/components/Nav.css";
 import * as avatarStyles from "./userAvatar.css";
-import { signOutWithForm } from "@/app/serverActions/auth";
+import { signOutWithForm } from "@/serverActions/auth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
