@@ -1,5 +1,5 @@
 import * as styles from "@/styles/components/atom/input.css";
-import { CSSProperties } from "react";
+import { CSSProperties, RefAttributes } from "react";
 
 interface InputProps {
   id?: string;
@@ -11,6 +11,7 @@ interface InputProps {
   style?: CSSProperties;
   disabled?: boolean;
   name?: string;
+  defaultValue?: string;
 }
 
 export const Input = ({
@@ -23,6 +24,7 @@ export const Input = ({
   style,
   name,
   disabled,
+  defaultValue,
 }: InputProps) => {
   return (
     <input
@@ -35,6 +37,7 @@ export const Input = ({
       required={required}
       style={style}
       disabled={disabled}
+      defaultValue={defaultValue}
     />
   );
 };
