@@ -10,11 +10,13 @@ import { FormEventHandler, useState } from "react";
 import { Input } from "@/components/atom/Input";
 import axios from "axios";
 import { useToastStore } from "@/stores/useToastStore";
+import Modal from "@/components/Modal";
 
 export const AccountSetting = () => {
   const { data: session, update } = useSession();
   const [isEditMode, setIsEditMode] = useState(false);
   const [base64Image, setBase64Image] = useState<string | null>(null);
+  const [isPasswordChangeModalOpen, setIsPasswordChangeModalOpen] = useState(false);
   const toast = useToastStore((state) => state.showToast);
 
   const handleEditClick = () => {
@@ -44,6 +46,14 @@ export const AccountSetting = () => {
         window.location.reload();
       }
     });
+  };
+
+  const handlePasswordChange = () => {
+    setIsPasswordChangeModalOpen(true);
+  };
+
+  const handleChangePasswordSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -190,7 +200,9 @@ export const AccountSetting = () => {
               <p className={styles.passwordChangeContents}>패스워드</p>
             </div>
 
-            <Button className={styles.passwordChangeButton}>패스워드 변경</Button>
+            <Button className={styles.passwordChangeButton} onClick={handlePasswordChange}>
+              패스워드 변경
+            </Button>
           </div>
         </div>
 
@@ -200,6 +212,104 @@ export const AccountSetting = () => {
           <div className={styles.socialLoginContainer}></div>
         </div>
       </div>
+
+      <Modal
+        title="비밀번호 변경"
+        isOpen={isPasswordChangeModalOpen}
+        onClose={() => setIsPasswordChangeModalOpen(false)}
+      >
+        <form
+          onSubmit={handleChangePasswordSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 15,
+            fontSize: 14,
+            paddingTop: 20,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+            }}
+          >
+            <label htmlFor="currentPassword" style={{ width: 189 }}>
+              현재 비밀번호
+            </label>
+            <Input
+              id="currentPassword"
+              type="text"
+              name="currentPassword"
+              placeholder="현재 비밀번호을 입력해주세요."
+              className={styles.editInput}
+              required
+            />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+            }}
+          >
+            <label htmlFor="changePassword" style={{ width: 189 }}>
+              변경 비밀번호
+            </label>
+            <Input
+              id="changePassword"
+              type="text"
+              name="changePassword"
+              placeholder="변경할 비밀번호을 입력해주세요."
+              className={styles.editInput}
+              required
+            />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+            }}
+          >
+            <label htmlFor="confirmPassword" style={{ width: 189 }}>
+              변경 비밀번호 확인
+            </label>
+            <Input
+              id="confirmPassword"
+              type="text"
+              name="confirmPassword"
+              placeholder="변경 비밀번호를 다시 입력해주세요."
+              className={styles.editInput}
+              required
+            />
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: 5 }}>
+            <Button
+              style={{
+                width: 90,
+                borderRadius: 5,
+                background: "white",
+                color: "black",
+                border: "1px solid black",
+              }}
+              onClick={() => {
+                setIsPasswordChangeModalOpen(false);
+              }}
+            >
+              취소
+            </Button>
+
+            <Button type="submit" style={{ borderRadius: 5, width: 90 }}>
+              변경
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
