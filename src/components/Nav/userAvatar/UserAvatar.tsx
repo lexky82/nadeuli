@@ -46,7 +46,13 @@ export const UserAvatar = () => {
       {isVisible && (
         <div className={avatarStyles.profileContainer}>
           <div className={avatarStyles.profileWrapper}>
-            <div className={avatarStyles.defaultProfileImage} />
+            <img
+              src={`http://localhost:4000/static/uploads/users/${session?.user?.email}/profile.jpeg`}
+              width={82}
+              height={82}
+              alt="profile"
+              className={avatarStyles.defaultProfileImage}
+            />
 
             <div>
               <p>{session?.user?.name}</p>

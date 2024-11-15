@@ -35,9 +35,6 @@ export const profileWrapper = style({
 
 export const defaultProfileImage = style({
   borderRadius: "50%",
-  width: 82,
-  height: 82,
-  background: "#fff",
 });
 
 export const userEmail = style({
