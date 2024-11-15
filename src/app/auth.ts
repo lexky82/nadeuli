@@ -66,8 +66,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return refreshedToken;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
+      const updatedUser = await fetchUserFromDatabase(token);
+
       session.accessToken = token.accessToken;
       session.accessTokenExpires = token.accessTokenExpires;
+
+      session.user = {
+        ...session.user,
+        name: updatedUser.user.name,
+        email: updatedUser.user.email,
+      };
       return session;
     },
   },
@@ -92,6 +100,22 @@ const refreshAccessToken = async (token: JWT) => {
       accessToken: refreshedTokens.accessToken,
       accessTokenExpires: Date.now() + 3600 * 1000,
     };
+  } catch (error) {
+    console.error("Error refreshing access token:", error);
+
+    return null;
+  }
+};
+
+const fetchUserFromDatabase = async (token: JWT) => {
+  try {
+    const res = await axios.post("http://localhost:4000/api/profile/profile", {
+      email: token.email,
+    });
+
+    if (res.status === 200) {
+      return res.data;
+    }
   } catch (error) {
     console.error("Error refreshing access token:", error);
 
