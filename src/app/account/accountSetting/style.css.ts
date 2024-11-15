@@ -93,3 +93,34 @@ export const socialLoginContainer = style({
   borderRadius: 15,
   boxShadow: "0 4px 4px rgba(0,0,0,0.3)",
 });
+
+export const editFormFieldContainer = style({
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  gap: 8,
+});
+
+export const editModeQuitButtons = style({
+  display: "flex",
+  height: 40,
+  gap: 10,
+  borderRadius: 5,
+  position: "absolute",
+  right: 20,
+  bottom: 20,
+});
+
+export const editInput = style({
+  outline: "1px solid",
+
+  ":hover": {
+    outline: "1px solid",
+    outlineColor: themeVars.colors.primary,
+  },
+
+  ":focus": {
+    outline: "1px solid",
+    outlineColor: themeVars.colors.primary,
+  },
+});
