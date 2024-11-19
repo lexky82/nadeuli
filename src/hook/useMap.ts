@@ -8,6 +8,12 @@ interface mapOptionType {
   zoom?: number;
 }
 
+export interface NaverMapEventHandlers {
+  click: naver.maps.PointerEvent;
+  bounds_changed: naver.maps.PointBounds;
+  zoom_changed: number;
+}
+
 const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
   let nmap: naver.maps.Map;
 
@@ -21,14 +27,14 @@ const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
     });
   }, []);
 
-  const addMapEvent = useCallback(
-    (eventName: string, handler: (e: naver.maps.PointerEvent) => void) => {
-      if (nmap) {
-        naver.maps.Event.addListener(nmap, eventName, handler);
-      }
-    },
-    []
-  );
+  const addMapEvent = <T extends keyof NaverMapEventHandlers>(
+    eventName: T,
+    handler: (e: NaverMapEventHandlers[T]) => void
+  ) => {
+    if (nmap) {
+      naver.maps.Event.addListener(nmap, eventName, handler as any);
+    }
+  };
 
   const mapMarker = useCallback(
     ({ position, title }: { position: [number, number]; title: string }) => {
