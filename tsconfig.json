@@ -12,12 +12,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "typeRoots": ["./node_modules/@types"],
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "types": ["next-auth"],
     "paths": {
       "@/*": ["./src/*"]
     }
