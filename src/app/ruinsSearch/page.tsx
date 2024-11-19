@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import NaverMap from "./NaverMap";
+import NaverMap, { marker } from "../../components/NaverMap";
 import { useState } from "react";
 import RuinsDetail from "./RuinsDetail";
 import * as styles from "./style.css";
@@ -16,6 +16,10 @@ const runinsSearchPage = ({}) => {
 
   const closeDetailPanel = () => {
     setSelectedRuins(null);
+  };
+
+  const handleBoundsChanged = (e: naver.maps.PointBounds) => {
+    console.log(e.getCenter());
   };
 
   return (
@@ -67,7 +71,11 @@ const runinsSearchPage = ({}) => {
         )}
       </aside>
 
-      <NaverMap />
+      <NaverMap
+        id="map"
+        onBoundsChanged={handleBoundsChanged}
+        size={{ width: 1920, height: 848 }}
+      />
     </div>
   );
 };
