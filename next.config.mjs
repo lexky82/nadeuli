@@ -3,6 +3,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   async rewrites() {
     return [
       {
@@ -24,6 +25,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "naver.github.io",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
       },
     ],
   },
