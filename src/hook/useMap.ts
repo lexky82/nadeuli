@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type mapId = string;
 
@@ -10,36 +10,45 @@ interface mapOptionType {
 
 export interface NaverMapEventHandlers {
   click: naver.maps.PointerEvent;
-  bounds_changed: naver.maps.PointBounds;
+  bounds_changed: naver.maps.Bounds;
+  center_changed: naver.maps.Coord;
+  dragend: naver.maps.PointerEvent;
+  idle: naver.maps.KVO;
   zoom_changed: number;
 }
 
-const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
-  let nmap: naver.maps.Map;
+const useMap = (
+  mapId: mapId,
+  { center, size, zoom }: mapOptionType,
+  markers?: naver.maps.Marker[]
+) => {
+  const [nmap, setnmap] = useState<naver.maps.Map | undefined>();
 
-  const initializeMap = useCallback(() => {
-    nmap = new naver.maps.Map(mapId, {
-      center: center
-        ? new naver.maps.LatLng(...center)
-        : new naver.maps.LatLng(37.3595704, 127.105399),
-      size: size ? size : { width: 400, height: 400 },
-      zoom: zoom ? zoom : 16,
-    });
-  }, []);
+  const initializeMap = () => {
+    setnmap(
+      new naver.maps.Map(mapId, {
+        center: center
+          ? new naver.maps.LatLng(...center)
+          : new naver.maps.LatLng(37.3595704, 127.105399),
+        size: size ? size : { width: 400, height: 400 },
+        zoom: zoom ? zoom : 16,
+      })
+    );
+  };
 
   const addMapEvent = <T extends keyof NaverMapEventHandlers>(
     eventName: T,
     handler: (e: NaverMapEventHandlers[T]) => void
   ) => {
     if (nmap) {
-      naver.maps.Event.addListener(nmap, eventName, handler as any);
+      naver.maps.Event.addListener(nmap, eventName, handler);
     }
   };
 
   const mapMarker = useCallback(
     ({ position, title }: { position: [number, number]; title: string }) => {
       if (nmap) {
-        const marker = new naver.maps.Marker({
+        new naver.maps.Marker({
           position: new naver.maps.LatLng(...position),
           map: nmap,
           title,
@@ -49,10 +58,28 @@ const useMap = (mapId: mapId, { center, size, zoom }: mapOptionType) => {
     []
   );
 
+  const updateMarkers = useCallback(() => {
+    if (nmap) {
+      const bounds = nmap.getBounds();
+
+      markers &&
+        markers.forEach((marker) => {
+          if (bounds.hasPoint(marker.getPosition())) {
+            if (!marker.getMap()) marker.setMap(nmap);
+          } else {
+            if (marker.getMap()) {
+              marker.setMap(null);
+            }
+          }
+        });
+    }
+  }, [markers, nmap]);
+
   return {
     initializeMap,
     addMapEvent,
     mapMarker,
+    updateMarkers,
   };
 };
 
