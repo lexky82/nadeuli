@@ -1,8 +1,13 @@
 "use client";
 
 import Image from "next/image";
+<<<<<<< HEAD
 import NaverMap, { responseMarkerData } from "../../components/NaverMap";
 import { useEffect, useState } from "react";
+=======
+import NaverMap, { marker } from "../../components/NaverMap";
+import { useState } from "react";
+>>>>>>> 898ebc7fdc6c6fe42aa5e875d75652911b731e08
 import RuinsDetail from "./RuinsDetail";
 import * as styles from "./style.css";
 import { mapContentsType, mapContents } from "../../utils/exampleData";
@@ -29,6 +34,7 @@ const runinsSearchPage = ({}) => {
     setSelectedRuins(null);
   };
 
+<<<<<<< HEAD
   const handleBoundsChanged = async (e: naver.maps.KVO) => {
     // const { _max, _min } = e.__targets.scale.target.bounds;
     // const { x: maxX, y: maxY } = _max;
@@ -46,6 +52,10 @@ const runinsSearchPage = ({}) => {
     //   setAccumulationMarkers(resData);
     //   setRendingMarkers(resData);
     // }
+=======
+  const handleBoundsChanged = (e: naver.maps.PointBounds) => {
+    console.log(e.getCenter());
+>>>>>>> 898ebc7fdc6c6fe42aa5e875d75652911b731e08
   };
 
   return (
@@ -99,6 +109,7 @@ const runinsSearchPage = ({}) => {
 
       <NaverMap
         id="map"
+<<<<<<< HEAD
         onIdle={handleBoundsChanged}
         size={{ width: 1920, height: 848 }}
         markers={markers.map(
@@ -109,6 +120,10 @@ const runinsSearchPage = ({}) => {
               map: undefined,
             })
         )}
+=======
+        onBoundsChanged={handleBoundsChanged}
+        size={{ width: 1920, height: 848 }}
+>>>>>>> 898ebc7fdc6c6fe42aa5e875d75652911b731e08
       />
     </div>
   );
