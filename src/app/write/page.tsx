@@ -2,22 +2,20 @@
 
 import React, { useState } from "react";
 import NadeuliInfo from "./NadeuliInfo";
+import useWriteStore from "@/stores/useWriteStepStore";
 
 const Step2 = () => <div>기행문 작성</div>;
 const Step3 = () => <div>대표 이미지 선택</div>;
 
 const Stepper = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const currentStep = useWriteStore((state) => state.currentStep);
+  const changeStep = useWriteStore((state) => state.changeStep);
 
   const steps = [
     { label: "나들이 관련 정보 입력", component: <NadeuliInfo /> },
     { label: "기행문 작성", component: <Step2 /> },
     { label: "대표 이미지 선택", component: <Step3 /> },
   ];
-
-  const handleStepChange = (stepIndex: number) => {
-    setCurrentStep(stepIndex);
-  };
 
   return (
     <div
@@ -34,7 +32,7 @@ const Stepper = () => {
         {steps.map((step, index) => (
           <div
             key={index}
-            onClick={() => handleStepChange(index + 1)}
+            onClick={() => changeStep(index + 1)}
             style={{
               display: "flex",
               alignItems: "center",
