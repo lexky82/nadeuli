@@ -20,9 +20,23 @@ export interface NaverMapEventHandlers {
 const useMap = (
   mapId: mapId,
   { center, size, zoom }: mapOptionType,
-  markers?: naver.maps.Marker[]
+  markers?: naver.maps.Marker[],
+  onMarkerClick?: (marker: naver.maps.Marker) => void
 ) => {
   const [nmap, setnmap] = useState<naver.maps.Map | undefined>();
+
+  useEffect(() => {
+    if (nmap) {
+      addMapEvent("idle", () => updateMarkers());
+
+      markers?.forEach((marker) => {
+        naver.maps.Event.addListener(marker, "click", () => {
+          nmap.panTo(marker.getPosition(), { duration: 300, easing: "easeInCubic" });
+          onMarkerClick && onMarkerClick(marker);
+        });
+      });
+    }
+  }, [nmap, markers]);
 
   const initializeMap = () => {
     setnmap(
@@ -36,14 +50,17 @@ const useMap = (
     );
   };
 
-  const addMapEvent = <T extends keyof NaverMapEventHandlers>(
-    eventName: T,
-    handler: (e: NaverMapEventHandlers[T]) => void
-  ) => {
-    if (nmap) {
-      naver.maps.Event.addListener(nmap, eventName, handler);
-    }
-  };
+  const addMapEvent = useCallback(
+    <T extends keyof NaverMapEventHandlers>(
+      eventName: T,
+      handler: (e: NaverMapEventHandlers[T]) => void
+    ) => {
+      if (nmap) {
+        naver.maps.Event.addListener(nmap, eventName, handler);
+      }
+    },
+    [nmap]
+  );
 
   const mapMarker = useCallback(
     ({ position, title }: { position: [number, number]; title: string }) => {
@@ -65,7 +82,9 @@ const useMap = (
       markers &&
         markers.forEach((marker) => {
           if (bounds.hasPoint(marker.getPosition())) {
-            if (!marker.getMap()) marker.setMap(nmap);
+            if (!marker.getMap()) {
+              marker.setMap(nmap);
+            }
           } else {
             if (marker.getMap()) {
               marker.setMap(null);
@@ -76,6 +95,7 @@ const useMap = (
   }, [markers, nmap]);
 
   return {
+    nmap,
     initializeMap,
     addMapEvent,
     mapMarker,

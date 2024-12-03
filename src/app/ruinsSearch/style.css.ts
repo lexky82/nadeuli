@@ -8,7 +8,9 @@ export const ruinsSearchContainer = style({
 export const mapAsideContainer = style({
   display: "flex",
   position: "absolute",
-  height: "calc(100vh - 71px)",
+  maxHeight: "calc(100vh - 4.4375rem)",
+  minHeight: "calc(100vh - 4.4375rem)",
+  width: 395,
   zIndex: 10,
 });
 
@@ -19,6 +21,7 @@ export const divider = style({
 
 export const asideWrapper = style({
   display: "flex",
+  width: 395,
   flexWrap: "wrap",
   padding: "20px 0px",
   gap: 10,
@@ -47,6 +50,9 @@ export const siteText = style({
 
 export const contentsContainer = style({
   padding: 25,
+  maxHeight: "calc(53rem - 13.625rem)",
+  minHeight: "calc(53rem - 13.625rem)",
+  overflowY: "scroll",
 });
 
 export const contentsWrapper = style({
