@@ -1,7 +1,7 @@
 "use client";
 
 import useMap, { NaverMapEventHandlers } from "@/hook/useMap";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 export interface responseMarkerData {
   id: number;
@@ -11,6 +11,7 @@ export interface responseMarkerData {
 
 interface NaverMapProps {
   id: string;
+  selectedId?: number | string | null;
   onBoundsChanged?: (event: NaverMapEventHandlers["bounds_changed"]) => void;
   onCenterChanged?: (event: NaverMapEventHandlers["center_changed"]) => void;
   onDragEnd?: (event: NaverMapEventHandlers["dragend"]) => void;
@@ -19,10 +20,12 @@ interface NaverMapProps {
   size?: { width: number; height: number };
   zoom?: number;
   markers?: naver.maps.Marker[];
+  onMarkerClick?: (marker: naver.maps.Marker) => void;
 }
 
-export default function NaverMap({
+const NaverMap = memo(function NaverMap({
   id,
+  selectedId,
   onBoundsChanged,
   onCenterChanged,
   onDragEnd,
@@ -31,30 +34,44 @@ export default function NaverMap({
   size,
   zoom,
   markers,
+  onMarkerClick,
 }: NaverMapProps) {
-  const { initializeMap, addMapEvent, updateMarkers } = useMap(
+  const { nmap, initializeMap, addMapEvent } = useMap(
     id,
     {
       center: center,
       size: size,
       zoom: zoom,
     },
-    markers
+    markers,
+    onMarkerClick
   );
 
   useEffect(() => {
     initializeMap();
-    onCenterChanged && addMapEvent("center_changed", onCenterChanged);
-    onBoundsChanged && addMapEvent("bounds_changed", onBoundsChanged);
-    onDragEnd && addMapEvent("dragend", onDragEnd);
-    onIdle && addMapEvent("idle", onIdle);
   }, []);
 
   useEffect(() => {
-    if (markers && markers.length > 1) {
-      addMapEvent("idle", () => updateMarkers());
+    if (selectedId) {
+      markers &&
+        markers
+          .find(
+            (marker) => parseInt(marker.getTitle().match(/\d+/g)?.join("") || "") === selectedId
+          )
+          ?.trigger("click");
     }
-  }, [markers]);
+  }, [selectedId, markers]);
+
+  useEffect(() => {
+    if (nmap) {
+      onCenterChanged && addMapEvent("center_changed", onCenterChanged);
+      onBoundsChanged && addMapEvent("bounds_changed", onBoundsChanged);
+      onDragEnd && addMapEvent("dragend", onDragEnd);
+      onIdle && addMapEvent("idle", onIdle);
+    }
+  }, [nmap]);
 
   return <div id={id} />;
-}
+});
+
+export default NaverMap;
