@@ -18,6 +18,7 @@ const NadeuliInfo = () => {
         </label>
 
         <input
+          required
           type="text"
           name="title"
           id="title"
@@ -37,6 +38,7 @@ const NadeuliInfo = () => {
         </label>
 
         <input
+          required
           type="text"
           name="location"
           id="location"
@@ -55,6 +57,7 @@ const NadeuliInfo = () => {
           방문 날짜
         </label>
         <input
+          required
           type="date"
           name="date"
           id="date"
@@ -139,80 +142,22 @@ const NadeuliInfo = () => {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: 10, flexDirection: "column" }}>
-        <label style={{ width: 80 }} htmlFor="title">
+      <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
+        <label style={{ width: "fit-content" }} htmlFor="visitor">
           방문 인원
         </label>
 
-        <div style={{ display: "flex", gap: 10 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 100,
-              height: 80,
-              fontWeight: "bold",
-              border: "1px solid",
-              borderColor: themeVars.colors.gray,
-              borderRadius: 15,
-              cursor: "pointer",
-            }}
-          >
-            1~5
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 100,
-              height: 80,
-              fontWeight: "bold",
-              border: "1px solid",
-              borderRadius: 15,
-              cursor: "pointer",
-              borderColor: themeVars.colors.gray,
-            }}
-          >
-            6~10
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 100,
-              height: 80,
-              fontWeight: "bold",
-              border: "1px solid",
-              borderRadius: 15,
-              cursor: "pointer",
-              borderColor: themeVars.colors.gray,
-            }}
-          >
-            10~30
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 100,
-              height: 80,
-              fontWeight: "bold",
-              border: "1px solid",
-              borderRadius: 15,
-              cursor: "pointer",
-              borderColor: themeVars.colors.gray,
-            }}
-          >
-            30~
-          </div>
-        </div>
-
-        <Button style={{ borderRadius: 5, width: 187, height: 35, marginTop: 35 }}>계속</Button>
+        <input
+          type="number"
+          name="visitor"
+          id="visitor"
+          style={{ width: 50, height: 20 }}
+          required
+          min={0}
+        />
       </div>
+
+      <Button style={{ borderRadius: 5, width: 187, height: 35, marginTop: 35 }}>계속</Button>
     </div>
   );
 };
