@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import NadeuliInfo from "./NadeuliInfo";
 import useWriteStore from "@/stores/useWriteStepStore";
+import WriteTravelouge from "./WriteTravelogue";
 
-const Step2 = () => <div>기행문 작성</div>;
 const Step3 = () => <div>대표 이미지 선택</div>;
 
 const Stepper = () => {
@@ -13,7 +13,7 @@ const Stepper = () => {
 
   const steps = [
     { label: "나들이 관련 정보 입력", component: <NadeuliInfo /> },
-    { label: "기행문 작성", component: <Step2 /> },
+    { label: "기행문 작성", component: <WriteTravelouge /> },
     { label: "대표 이미지 선택", component: <Step3 /> },
   ];
 
@@ -58,7 +58,6 @@ const Stepper = () => {
 
         <div
           style={{
-            border: "1px solid #ddd",
             borderRadius: "10px",
             background: "#f9f9f9",
             boxShadow: "0 4px 4px rgba(0,0,0,0.3)",
