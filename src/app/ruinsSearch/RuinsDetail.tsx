@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import * as styles from "./ruinsDetail.style.css";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Image from "next/image";
@@ -6,13 +6,15 @@ import { Pagination, Navigation, Keyboard, Mousewheel } from "swiper/modules";
 import Link from "next/link";
 import Tabs from "@/components/Tabs";
 import { TabData, exmapleFetchData } from "../../utils/exampleData";
+import { RuinsInfo } from "./page";
+import addressClassifier from "@/utils/addressClassifier";
 
 interface RuinsDetailProps {
-  ruinsId: number | null;
+  ruinsInfo: RuinsInfo;
   closeDetailPanel: () => void;
 }
 
-const RuinsDetail = ({ ruinsId, closeDetailPanel }: RuinsDetailProps) => {
+const RuinsDetail = memo(function RuinsDetail({ ruinsInfo, closeDetailPanel }: RuinsDetailProps) {
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -60,19 +62,21 @@ const RuinsDetail = ({ ruinsId, closeDetailPanel }: RuinsDetailProps) => {
 
         <div className={styles.detailContentContainer}>
           <div className={styles.detailFirstContentsWrapper}>
-            <p className={styles.detailContentType}>{exmapleFetchData.type}</p>
+            <p className={styles.detailContentType}>{ruinsInfo && ruinsInfo.CL_NM}</p>
 
             <div className={styles.thumbupWrapper}>
               <Image src="/Thumb_up.svg" alt="Thumb_up" width={16} height={16} />
-              <span>1,515</span>
+              <span>{ruinsInfo && ruinsInfo.ThumbsUp}</span>
             </div>
           </div>
 
           <Link href={exmapleFetchData.viewDetail} className={styles.detailTitleLink}>
-            <p className={styles.detailContentTitle}>삼년산성</p>
+            <p className={styles.detailContentTitle}>{ruinsInfo && ruinsInfo.POI_NM}</p>
           </Link>
 
-          <p>{exmapleFetchData.location}</p>
+          <p>
+            <span>{addressClassifier(ruinsInfo)}</span>
+          </p>
           <p className={styles.distanceText}>{exmapleFetchData.fromMyLocation}km</p>
 
           <div className={styles.buttonContainer}>
@@ -97,6 +101,6 @@ const RuinsDetail = ({ ruinsId, closeDetailPanel }: RuinsDetailProps) => {
       </button>
     </div>
   );
-};
+});
 
 export default RuinsDetail;
