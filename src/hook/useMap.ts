@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { makeMarkerClustering } from "@/utils/markerClustering";
 
 type mapId = string;
 
@@ -23,11 +24,15 @@ const useMap = (
   markers?: naver.maps.Marker[],
   onMarkerClick?: (marker: naver.maps.Marker) => void
 ) => {
-  const [nmap, setnmap] = useState<naver.maps.Map | undefined>();
+  const [nmap, setnmap] = useState<naver.maps.Map | null>(null);
 
   useEffect(() => {
     if (nmap) {
-      addMapEvent("idle", () => updateMarkers());
+      addMapEvent("idle", () => {
+        if (nmap.getZoom() >= 12) {
+          updateMarkers();
+        }
+      });
 
       markers?.forEach((marker) => {
         naver.maps.Event.addListener(marker, "click", () => {
@@ -35,6 +40,9 @@ const useMap = (
           onMarkerClick && onMarkerClick(marker);
         });
       });
+
+      initMarkerCluster();
+      getCurrentLocation();
     }
   }, [nmap, markers]);
 
@@ -46,8 +54,59 @@ const useMap = (
           : new naver.maps.LatLng(37.3595704, 127.105399),
         size: size ? size : { width: 400, height: 400 },
         zoom: zoom ? zoom : 16,
+        mapTypeId: "terrain",
       })
     );
+  };
+
+  const initMarkerCluster = useCallback(() => {
+    if (markers && markers.length > 0) {
+      const MarkerClustering = makeMarkerClustering(window.naver);
+      const markerClustering = new MarkerClustering({
+        minClusterSize: 1,
+        maxZoom: 12,
+        map: nmap,
+        markers,
+        disableClickZoom: false,
+        gridSize: 100,
+        icons: [
+          {
+            content:
+              '<div style="display:flex;justify-content: center;align-items:center;cursor:pointer;width:40px;height:40px;line-height:42px;font-size:14px;color:white;text-align:center;font-weight:bold;background-size:contain; border-radius: 50%;background-color:#0033A0;"></div>',
+            size: new naver.maps.Size(40, 40),
+            anchor: new naver.maps.Point(20, 20),
+          },
+        ],
+        indexGenerator: [10, 100, 200, 500, 1000],
+        stylingFunction: (clusterMarker: any, count: number) => {
+          if (clusterMarker) {
+            const firstChild = clusterMarker.getElement().querySelector("div:first-child");
+            if (firstChild) {
+              firstChild.innerHTML = count;
+            }
+          }
+        },
+      });
+    }
+  }, [markers, nmap]);
+
+  const getCurrentLocation = () => {
+    if (nmap && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          var lat = position.coords.latitude; // 위도
+          var lng = position.coords.longitude; // 경도
+          var currentLocation = new naver.maps.LatLng(lat, lng);
+
+          nmap.setCenter(currentLocation);
+        },
+        (error) => {
+          console.error("현재 위치를 가져오는 중 에러 발생:", error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation을 지원하지 않는 브라우저입니다.");
+    }
   };
 
   const addMapEvent = useCallback(
